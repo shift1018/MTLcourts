@@ -9,7 +9,15 @@
 - set up the GitHub repository for the project
 - define user stories for the trello board
 - setup the database in Azure 
+- configure databse connection to sql server
 3. Need assistance / figure things out
 
-
+2022/10/13 Alex
+1. Done / not done since last scrum:
+2. To do until next Scrum:
+- set up the GitHub repository for the project
+- define user stories for the trello board
+- setup the database in Azure 
+- configure databse connection to sql server
+3. Need assistance / figure things out
 
