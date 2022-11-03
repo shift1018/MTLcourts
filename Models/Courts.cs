@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace MTLcourts.Models
 {
@@ -21,7 +22,11 @@ namespace MTLcourts.Models
 
         public double AvgRating { get; set; }
 
-        
+        public ICollection<Comments> Comments { get; set; }
+         public ICollection<RatingsAndReviews> RatingsAndReviews { get; set; }
+         public ICollection<Intentions> Intentions { get; set; }
+
+         public ICollection<IdentityUser> User { get; set; }
         
     }
 }
