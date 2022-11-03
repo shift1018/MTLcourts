@@ -1,0 +1,15 @@
+<< current date goes here >>
+1. What I have done / not done since last Scrum?
+2. What I plan to do from this scrum to next? (next 24 hours)
+3. Where do I need assistance? What do I need to figure out?
+
+2022/10/13 Anton
+1. Done / not done since last scrum:
+2. To do until next Scrum:
+- set up the GitHub repository for the project
+- define user stories for the trello board
+- setup the database in Azure 
+3. Need assistance / figure things out
+
+
+
