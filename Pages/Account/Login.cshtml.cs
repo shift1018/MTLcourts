@@ -24,10 +24,17 @@ namespace MTLcourts.Pages
 
         public class InputModel
        {
+
         [Required]
-        [EmailAddress]
-        [Display(Name ="Email" )]
-        public string Email { get; set; }
+        [StringLength(15, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2 )]
+        [Display(Name ="Username" )]
+        public string UserName { get; set; } 
+
+
+        // [Required]
+        // [EmailAddress]
+        // [Display(Name ="Email" )]
+        // public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -42,10 +49,10 @@ namespace MTLcourts.Pages
             if (ModelState.IsValid)
             {
                 // last two params (false, true) refer to remember me (false) and lockout after multiple failure attempts (true)
-                var result = await signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, true);
+                var result = await signInManager.PasswordSignInAsync(Input.UserName, Input.Password, false, true);
                 if (result.Succeeded) {
                     // If succeeded, logging a message into a log with severity
-                    logger.LogInformation($"User {Input.Email} logged in");
+                    logger.LogInformation($"User {Input.UserName} logged in");
                     // adding a parameter into the url of registersuccess page (can now say "youve registered with this email" click to login)
                     return RedirectToPage("LoginSuccess");
                 } else { // user does not exist, password ivlaid, account locked out --> dont tell user why

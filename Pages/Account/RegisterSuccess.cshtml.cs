@@ -7,7 +7,7 @@ namespace MTLcourts.Pages
     {
           // need to have an email parameter to recieve registered email on page from register class
         [BindProperty(SupportsGet = true)]
-        public string Email { get; set; }
+        public string UserName { get; set; }
         public void OnGet()
         {
         }

@@ -28,14 +28,14 @@ namespace MTLcourts.Pages
        // inner class is like a grouping of all fields in forms. will recieve it in an instance of type InputModel (done above).
        public class InputModel
        {
-        // [Required]
-        // [StringLength(15, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2 )]
-        // [Display(Name ="Username" )]
-        // public string UserName { get; set; } 
-
         [Required]
-        [EmailAddress]
-        [Display(Name ="Email" )]
+        [StringLength(15, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2 )]
+        [Display(Name ="Username" )]
+        public string UserName { get; set; } 
+
+        // [Required]
+        // [EmailAddress]
+        // [Display(Name ="Email" )]
         public string Email { get; set; }
 
         [Required]
@@ -60,7 +60,8 @@ namespace MTLcourts.Pages
             if (ModelState.IsValid)
             {
                 // NEED to pick one unique identifier for account
-                var user = new IdentityUser {UserName = Input.Email, Email = Input.Email};
+                var user = new IdentityUser {UserName = Input.UserName, Email = Input.Email};
+                // {UserName = Input.Email, Email = Input.Email};
 
                 // insert data in Enitity Framework --> create new entity, say "save" or "add" and save changes
                 // does 2 things: 1) it will verify the user information (is username unique, if another account exists with same it will fail --> false)
@@ -70,9 +71,9 @@ namespace MTLcourts.Pages
                 var result = await userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded) {
                     // If succeeded, logging a message into a log with severity
-                    logger.LogInformation($"User {Input.Email} created a new account with password");
+                    logger.LogInformation($"User {Input.UserName} created a new account with password");
                     // adding a parameter into the url of registersuccess page (can now say "youve registered with this email" click to login)
-                    return RedirectToPage("RegisterSuccess", new {UserName = Input.Email});
+                    return RedirectToPage("RegisterSuccess", new {UserName = Input.UserName});
                 }
                 // If NOT succeeded need to give a list of errors to the template rendering to show back to user
                 // errors will show on asp-validation-summary="All" on template page
