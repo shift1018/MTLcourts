@@ -1,0 +1,12 @@
+﻿@page
+@model MTLcourts.Pages.AccessDeniedModel
+@{
+     ViewData["Title"] = "Access Denied";
+}
+
+<h1>@ViewData["Title"]</h1>
+@{
+    <p>Your Access was denied.
+        <a class="nav-link" asp-area="" asp-page="/Index">Click here to try again.</a>
+    </p>
+}
