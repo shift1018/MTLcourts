@@ -18,7 +18,7 @@ namespace MTLcourts.Models
         public string Address { get; set; }
 
         [Required, MinLength(4), MaxLength(10) ]
-        [RegularExpression(@"[A-Z0-9-]", ErrorMessage = "The postal code should be 4-10 characters and include numbers, uppercase and '-'")]  
+        [RegularExpression(@"^[A-Z0-9-]*$", ErrorMessage = "The postal code should be 4-10 characters and include numbers, uppercase and '-'")]  
         public string PostalCode { get; set; }
 
         public string? Description { get; set; }
@@ -29,11 +29,11 @@ namespace MTLcourts.Models
         [Required]
         public double AvgRating { get; set; }
 
-        public ICollection<Comments> Comments { get; set; }
-         public ICollection<Ratings> Ratings { get; set; }
-         public ICollection<Intentions> Intentions { get; set; }
+        public ICollection<Comments>? Comments { get; set; }
+         public ICollection<Ratings>? Ratings { get; set; }
+         public ICollection<Intentions>? Intentions { get; set; }
 
-         public ICollection<IdentityUser> User { get; set; }
-        public ICollection<Checkedin> Checkedin { get; set; }
+         public ICollection<IdentityUser>? User { get; set; }
+        public ICollection<Checkedin>? Checkedin { get; set; }
     }
 }
