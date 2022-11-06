@@ -47,3 +47,10 @@
 2. To do until next Scrum:
 - implement image upload
 3. Need assistance / figure things out
+
+2022/11/05 Alex
+1. Done / not done since last scrum:
+- Upload and display images
+2. To do until next Scrum:
+- research Maps api
+3. Need assistance / figure things out
