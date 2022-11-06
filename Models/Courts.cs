@@ -26,11 +26,11 @@ namespace MTLcourts.Models
        
         public string Description { get; set; }
 
-        [Required]
-        public string PhotoUrl { get; set; }
+        // [Required]
+        public string? PhotoUrl { get; set; }
 
-        
-        public double AvgRating { get; set; }
+        // [Required]
+        public double? AvgRating { get; set; }
 
         public ICollection<Comments>? Comments { get; set; }
          public ICollection<Ratings>? Ratings { get; set; }

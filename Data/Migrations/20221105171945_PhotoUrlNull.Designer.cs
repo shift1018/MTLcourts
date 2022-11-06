@@ -4,6 +4,7 @@ using MTLcourts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MTLcourts.Data.Migrations
 {
     [DbContext(typeof(CourtsDbContext))]
-    partial class CourtsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221105171945_PhotoUrlNull")]
+    partial class PhotoUrlNull
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -300,7 +302,7 @@ namespace MTLcourts.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<double?>("AvgRating")
+                    b.Property<double>("AvgRating")
                         .HasColumnType("float");
 
                     b.Property<string>("Description")
@@ -312,6 +314,7 @@ namespace MTLcourts.Data.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PhotoUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
