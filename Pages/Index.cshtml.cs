@@ -1,23 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authorization;
 using MTLcourts.Data;
 using MTLcourts.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MTLcourts.Pages;
 
+namespace MTLcourts.Pages;
+     [Authorize]
 public class IndexModel : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    private readonly CourtsDbContext db;
+    public IndexModel(CourtsDbContext db) => this.db = db;
 
-     private readonly CourtsDbContext db;
-
-    public IndexModel(ILogger<IndexModel> logger, CourtsDbContext db)
-    {
-        _logger = logger;
-        this.db = db;
-    }
-
+ 
     public List<Courts> courtsList { get; set; }
 
 

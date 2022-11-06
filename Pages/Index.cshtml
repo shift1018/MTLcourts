@@ -4,33 +4,13 @@
     ViewData["Title"] = "Home page";
 }
 
+
 <div class="text-center">
     <h1 class="display-4">MTL Courts</h1>
     <h2 class="display-4">Montreal's premier basketball court finder!</h2>
 </div>
 
 
-@* <div class="container">
-    <h3 class="display-4">The City's Top Courts</h3>
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    @foreach (var crt in Model.courtsList)
-        {
-  <div class="col">
-    <div class="card h-100 text-center">
-      <div class="card-body">
-        <h5 class="card-title">@crt.Name</h5>
-         <h6 class="card-subtitle mb-2 text-muted">@crt.Address</h6>
-        <p class="card-text">@art.Body</p>
-        <a class="btn btn-light" asp-page="/ArticleView" asp-route-id="@art.Id" title="Order @art.Title">Read more</a>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">@art.Created</small>
-      </div>
-    </div>
-  </div>
-        }
-</div>
-</div> *@
 
 
 
@@ -46,7 +26,10 @@
       <div class="card-body">
         <h5 class="card-title">@crt.Name</h5>
         <p class="card-text">@crt.Description</p>
-        @* <a class="btn btn-light" asp-page="/ViewCourt" asp-route-id="@crt.Id" title="Order @crt.Title">View Court</a> *@
+       <p class="card-text">Address : @crt.Address</p>
+            <p class="card-text">PostCode : @crt.PostalCode</p>
+            <p class="card-text">AvgRating : @crt.AvgRating</p>
+            <a asp-page="/view" asp-route-id="@crt.Id" >Details</a>
       </div>
     </div>
   </div>
