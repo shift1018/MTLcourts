@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.ComponentModel.DataAnnotations;
+
 using Microsoft.AspNetCore.Authorization;
 using MTLcourts.Data;
 using MTLcourts.Models;
 
 namespace MTLcourts.Pages
+
 {
     //Only allows logged in users to access this page
      [Authorize]
@@ -38,7 +39,7 @@ namespace MTLcourts.Pages
             await db.SaveChangesAsync();
               
 
-                return RedirectToPage("NewCourtSuccess");
+                return RedirectToPage("AddCourtSuccess");
     }
 
 
@@ -49,4 +50,7 @@ namespace MTLcourts.Pages
         {
         }
     }
+
+
+    
 }
