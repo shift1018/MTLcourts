@@ -4,12 +4,10 @@
     ViewData["Title"] = "Home page";
 }
 
-
 <div class="text-center">
     <h1 class="display-4">MTL Courts</h1>
     <h2 class="display-4">Montreal's premier basketball court finder!</h2>
 </div>
-
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var crt in Model.courtsList)
@@ -18,15 +16,12 @@
     <div class="card h-100">
          @if (crt.PhotoUrl != null)
         {
-      <img src="/@crt.PhotoUrl"  class="card-img-top" alt="...">
+      <img src="@crt.PhotoUrl"   class="card-img-top" alt="...">
         }
       <div class="card-body">
         <h5 class="card-title">@crt.Name</h5>
         <p class="card-text">@crt.Description</p>
-       <p class="card-text">Address : @crt.Address</p>
-            <p class="card-text">PostCode : @crt.PostalCode</p>
-            <p class="card-text">AvgRating : @crt.AvgRating</p>
-            <a asp-page="/view" asp-route-id="@crt.Id" >Details</a>
+        @* <a class="btn btn-light" asp-page="/ViewCourt" asp-route-id="@crt.Id" title="Order @crt.Title">View Court</a> *@
       </div>
     </div>
   </div>
