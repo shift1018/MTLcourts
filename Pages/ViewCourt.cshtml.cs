@@ -23,8 +23,8 @@ namespace MTLcourts.Pages
 
         public Courts court { get; set; }
 
-        [BindProperty]
-        public Comments comment { get; set; }
+        // [BindProperty]
+        // public Comments comment { get; set; }
 
         public List<Comments> courtComments { get; set; }   
 
@@ -41,10 +41,10 @@ namespace MTLcourts.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }            
+            // if (!ModelState.IsValid)
+            // {
+            //     return Page();
+            // }            
             var userName = User.Identity.Name; 
             var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault(); 
             var courtsId = Id;
@@ -54,12 +54,12 @@ namespace MTLcourts.Pages
                 User = user,
                 DateWhen = DateTime.Now,                
                 Comment = Comment,
-
             };
-            db.Comments.Add(comment);
+            db.Comments.Add(newComment);
             await db.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("ViewCourt", Id);
+
         }
 
 
