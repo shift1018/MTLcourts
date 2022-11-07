@@ -1,4 +1,4 @@
-﻿@inject SignInManager<IdentityUser> SignInManager;
+﻿@inject SignInManager<IdentityUser> signInManager;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +30,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        </ul>
-                        <ul class="navbar-nav ml-auto">
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        @if (signInManager.IsSignedIn(User)) {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="AdminManagement">AdminManagement</a>
                         </li>
@@ -39,12 +40,20 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="AddCourt">Add Court</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Log out</a>
+                        </li>
+                        
+                        }
+                        else{
+                            <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="Account/Register">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="Account/Login">Login</a>
-                        </li>
-                        </ul>
+                            </li>
+                            <li class="nav-item">
+                             
+                             <a class="nav-link text-dark" asp-area="" asp-page="Account/Login">Login</a>
+                            </li>
+                        }
+                    </ul>
                     
                 </div>
             </div>

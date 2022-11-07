@@ -65,9 +65,6 @@ namespace MTLcourts.Pages
              return Page();
         }
 
-
-
-
         public void OnGet()
         {
         }
