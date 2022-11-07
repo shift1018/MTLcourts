@@ -63,3 +63,13 @@
 - implement add comment feature and display comments by court on a view court page
 3. Need assistance / figure things out
 - implement roles authorization for user and admin
+
+
+2022/11/07 Anton
+1. Done / not done since last scrum:
+- began developing view court page
+- began implementation of add comment feature and display comments by court on a view court page
+2. To do until next Scrum:
+- implement rating feature on viewCourt page
+3. Need assistance / figure things out
+- add comment has an error (need help to resolve)
