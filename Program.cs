@@ -12,12 +12,12 @@ builder.Services.AddDbContextPool<CourtsDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("CourtsDBConnection"));
 });
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>options.SignIn.RequireConfirmedAccount= false)
         .AddEntityFrameworkStores<CourtsDbContext>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
-// Password settings.
+// Password settings. 
 options.Password.RequireDigit = true;
 options.Password.RequireLowercase = true;
 options.Password.RequireNonAlphanumeric = false;
@@ -85,3 +85,5 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
+
