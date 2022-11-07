@@ -36,6 +36,20 @@ namespace MTLcourts.Pages
             courtComments = await db.Comments.Where(comment => comment.CourtsId == Id).ToListAsync();
         }
 
+        // public async Task OnGetAsync()
+        // {
+        //     court = await db.Court.Include(court => court.User).Where(court => court.Id == Id).FirstOrDefaultAsync();
+        //     //courtComments = await db.Comments.Where(comment => comment.CourtsId == Id).ToListAsync();
+        //     courtComments = await(from c in db.Comments join u in db.Users on c.User.Id equals u.Id 
+        //                     select new
+        //                     {
+        //                         queryComment = c.Comment,
+                                
+        //                     });
+        // }
+
+
+
         [BindProperty]
         public string Comment { get; set; }
 

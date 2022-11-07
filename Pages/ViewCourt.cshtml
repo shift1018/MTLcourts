@@ -37,17 +37,19 @@
         </form>
     </div>
     <h2>Reviews</h2>
-    <div class="row g-4">
+    
         @foreach (var courtComments in Model.courtComments)
         {
-            <div class="col-sm-4">
-                <div class="">
-                    <div class="">
-                        <p >@courtComments.Comment</p>
-                    </div>
-                </div>
+    <div class="row">        
+            <div class="col-2">
+                <p>@courtComments.User</p>  
+                <p>@courtComments.DateWhen</p>  
             </div>
+            <div class="col">
+              <p>@courtComments.Comment</p>  
+            </div>
+    </div>        
         }
-    </div>
+    
 
 </div>
