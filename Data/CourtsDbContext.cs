@@ -12,7 +12,11 @@ namespace MTLcourts.Data
     {
          public CourtsDbContext(DbContextOptions<CourtsDbContext> options) : base(options) {}
            public DbSet<Courts> Court { get; set; }
-        
+
+           public DbSet<Ratings> Ratings { get; set; }
+
+            public DbSet<Comments> Comments { get; set; }
+
         // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         // {
         //     optionsBuilder.UseSqlServer(@"Data source=mtlcourtsdb.db");
