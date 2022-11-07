@@ -11,12 +11,14 @@ namespace MTLcourts.Pages
     {
         private RoleManager<IdentityRole> roleManager;
 
+        private UserManager<IdentityUser> userManager;
+
         // private CourtsDbContext db;
 
         // [BindProperty]
         // public InputModel Input { get; set; }
-        public AdminManagementModel(RoleManager<IdentityRole> roleManager){
-            
+        public AdminManagementModel(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager){
+            this.userManager = userManager;
             this.roleManager = roleManager;
          
         }
@@ -29,10 +31,11 @@ namespace MTLcourts.Pages
         // }
         
         public List<IdentityRole> LRoles = new List<IdentityRole>();
-     
+        public List<IdentityUser> LUsers = new List<IdentityUser>();
         public async Task OnGetAsync()
         {
           LRoles =roleManager.Roles.ToList();
+          LUsers = userManager.Users.ToList();
         }
 
         

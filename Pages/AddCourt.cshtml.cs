@@ -4,6 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using MTLcourts.Data;
 using MTLcourts.Models;
+using Azure.Storage.Blobs.Models;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Azure;
 
 namespace MTLcourts.Pages
 
@@ -17,6 +21,8 @@ namespace MTLcourts.Pages
 
     {
 
+      
+
          private CourtsDbContext db;
 
          private readonly ILogger<RegisterModel> logger;
@@ -24,16 +30,19 @@ namespace MTLcourts.Pages
 
 
          private IWebHostEnvironment _environment;
+         private readonly IConfiguration _configuration;
 
 
 
-         public AddCourtModel(CourtsDbContext db, ILogger<RegisterModel> logger, IWebHostEnvironment environment) {
+         public AddCourtModel(CourtsDbContext db, ILogger<RegisterModel> logger, IWebHostEnvironment environment, IConfiguration configuration ) {
 
             this.db = db;
 
             this.logger = logger;
 
              _environment = environment;
+
+             _configuration = configuration;
 
         }
 
@@ -49,6 +58,12 @@ namespace MTLcourts.Pages
 
         public IFormFile Upload { get; set; }
 
+        [BindProperty]
+        public List<BlobItem> BlobList { get; set; }
+
+       
+        
+
 
         public async Task<IActionResult> OnPostAsync()
 
@@ -62,49 +77,87 @@ namespace MTLcourts.Pages
 
               if (Upload != null) {
 
-                  string fileExtension = Path.GetExtension(Upload.FileName).ToLower();
+              string _postedFileName = Upload.FileName;
+              string _fileContentType = Upload.ContentType;
+              string _actionMessage = " ";
 
-                  string[] allowedExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
+              try
+    {
+        string blobstorageconnection = _configuration.GetSection("AzureStorage")["ConnectionString"];
+        string containerName = _configuration.GetSection("AzureStorage")["ContainerName"];
+            
+        // get storage account obect using connection string    
+        CloudStorageAccount cloudStorageAccount = CloudStorageAccount.Parse(blobstorageconnection);
+        
+        // create the blob client    
+        CloudBlobClient blobClient = cloudStorageAccount.CreateCloudBlobClient();
+        
+        // get container reference.    
+        CloudBlobContainer container = blobClient.GetContainerReference(containerName);
+        
+        // get the blob reference you want to work with    
+        CloudBlockBlob blockBlob = container.GetBlockBlobReference(_postedFileName);
+       
+        //assuming we upload only image from here, else find dynamically 
+        blockBlob.Properties.ContentType = _fileContentType; //"image/jpeg";
+        
+        using (var data = Upload.OpenReadStream())
+        {
+            await blockBlob.UploadFromStreamAsync(data);
+        }
 
-                  if (!allowedExtensions.Contains(fileExtension)) 
-                  {
+        _actionMessage = "Uploaded Successfully to Blob Storage";
+    }
+    catch (RequestFailedException ex)
+    {
+        _actionMessage = ex.ToString();
+    }
+                    
+                // return  Page();
 
-                    // Display error and the form again
+                //   string fileExtension = Path.GetExtension(Upload.FileName).ToLower();
 
-                    ModelState.AddModelError(string.Empty, "Only image files (jpg, jpeg, gif, png) are allowed");
+                //   string[] allowedExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
 
-                    return Page();
+                //   if (!allowedExtensions.Contains(fileExtension)) 
+                //   {
 
-                  }
+                //     // Display error and the form again
 
-                var invalids = System.IO.Path.GetInvalidFileNameChars();
+                //     ModelState.AddModelError(string.Empty, "Only image files (jpg, jpeg, gif, png) are allowed");
 
-                var newFileName = String.Join("_", Upload.FileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries) ).TrimEnd('.');
+                //     return Page();
 
-                var destPath = Path.Combine(_environment.ContentRootPath, "wwwroot", "Uploads", Upload.FileName);
+                //   }
 
-                try {
+                // var invalids = System.IO.Path.GetInvalidFileNameChars();
 
-                using (var fileStream = new FileStream(destPath, FileMode.Create))
+                // var newFileName = String.Join("_", Upload.FileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries) ).TrimEnd('.');
 
-                {
+                // var destPath = Path.Combine(_environment.ContentRootPath, "wwwroot", "Uploads", Upload.FileName);
 
-                    Upload.CopyTo(fileStream);
+                // try {
 
-                }
+                // using (var fileStream = new FileStream(destPath, FileMode.Create))
 
-                } catch (Exception ex) when (ex is IOException || ex is SystemException) {
+                // {
 
-                // TODO: Log this as an error
+                //     Upload.CopyTo(fileStream);
 
-                ModelState.AddModelError(string.Empty, "Internal error saving the uploaded file");
+                // }
 
-                return Page();
+                // } catch (Exception ex) when (ex is IOException || ex is SystemException) {
 
-                }
+                // // TODO: Log this as an error
 
-                photoUrl = Path.Combine("Uploads", newFileName);
+                // ModelState.AddModelError(string.Empty, "Internal error saving the uploaded file");
 
+                // return Page();
+
+                // }
+
+               
+                photoUrl = Path.Combine("https://mtlcourtsblob.blob.core.windows.net/mtlcourtscontainer/", _postedFileName);
               }       
               var newCourt = new MTLcourts.Models.Courts {PhotoUrl = photoUrl, Name = NewCourt.Name, Address = NewCourt.Address, Description = NewCourt.Description, PostalCode = NewCourt.PostalCode, AvgRating = NewCourt.AvgRating };
 
