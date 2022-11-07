@@ -54,3 +54,12 @@
 2. To do until next Scrum:
 - research Maps api
 3. Need assistance / figure things out
+
+2022/11/05 Anton
+1. Done / not done since last scrum:
+- tried to implement roles authorization for user and admin
+2. To do until next Scrum:
+- develop view court page
+- implement add comment feature and display comments by court on a view court page
+3. Need assistance / figure things out
+- implement roles authorization for user and admin
