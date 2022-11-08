@@ -41,7 +41,7 @@ namespace MTLcourts.Pages
         public async Task OnGetAsync()
         {
             court = await db.Court.Include(court => court.User).Where(court => court.Id == Id).FirstOrDefaultAsync();
-            courtComments = await db.Comments.Where(comment => comment.CourtsId == Id).ToListAsync();
+            courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
 
            // calculate average rating 
            
