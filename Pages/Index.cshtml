@@ -4,6 +4,10 @@
     ViewData["Title"] = "Home page";
 }
 
+  
+ 
+
+
 <div class="text-center">
     <h1 class="display-4">MTL Courts</h1>
     <h2 class="display-4">Montreal's premier basketball court finder!</h2>
@@ -31,3 +35,23 @@
   </div>
         }
 </div>
+
+<div class="container">
+<div id="map"></div>
+</div>
+
+<script>
+   $.ajax({
+        url: '/Home/GetBranch', 
+        success: function (data) {
+            console.log(data)
+            $(data).each(function (index, item) {
+                var lat = Court.CourtLatitude;
+                var long = item.branchGeoLocationLong;
+                L.marker([lat, long], { icon: greenIcon }).bindPopup("I am the " + item.branchName +" leaf.").addTo(map);
+            });
+        },
+    });
+</script>
+
+

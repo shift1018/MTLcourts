@@ -46,7 +46,6 @@ namespace MTLcourts.Pages
             court = await db.Court.Include(court => court.User).Where(court => court.Id == Id).FirstOrDefaultAsync();
             courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
 
-
         }
 
         // public async Task OnGetAsync()

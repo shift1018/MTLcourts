@@ -74,6 +74,13 @@
 3. Need assistance / figure things out
 - add comment has an error (need help to resolve)
 
+2022/11/07 Alex
+1. Done / not done since last scrum:
+- Upload and display images finished. 
+2. To do until next Scrum:
+- Begin working on maps api
+3. Need assistance / figure things out
+
 
 
 2022/11/08 Anton
@@ -97,3 +104,11 @@
 - Do with the Authourization
 3. Need assistance / figure things out
 - research on the login and tokens table
+
+2022/11/08 Alex
+1. Done / not done since last scrum:
+- half of maps working
+2. To do until next Scrum:
+- finish maps api
+- begin looking at styling
+3. Need assistance / figure things out
