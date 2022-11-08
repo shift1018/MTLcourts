@@ -49,15 +49,18 @@ body {
   font-size: 20px;
 }
 
+.player-reviews {
+  max-height: 300px;
+  width: auto;
+  overflow: scroll;
+}
 
 
-
-
+/* star-rating css */
 
 .rating-container {
   border: 1px solid black;
   display: inline-block;
-
 }
 
 
@@ -65,7 +68,7 @@ body {
   font-size: 0;
   white-space: nowrap;
   display: inline-block;
-  width: 248px;
+  width: 252px;
   height: 50px;
   overflow: hidden;
   position: relative;
