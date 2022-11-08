@@ -74,6 +74,8 @@
 3. Need assistance / figure things out
 - add comment has an error (need help to resolve)
 
+
+
 2022/11/08 Anton
 1. Done / not done since last scrum:
 - continued developing view court page
@@ -83,3 +85,15 @@
 - implement average rating for the court
 3. Need assistance / figure things out
 - join query to display user name for the comment
+
+
+2022/11/08 Xin Shi
+1. Done / not done since last scrum:
+- continued developing Roles and Users
+- completed creating roles
+- Fixed the issues of the EditRole pages, 
+2. To do until next Scrum:
+- Add the users to the Roles
+- Do with the Authourization
+3. Need assistance / figure things out
+- research on the login and tokens table
