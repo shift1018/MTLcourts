@@ -21,8 +21,9 @@ namespace MTLcourts.Models
         [RegularExpression(@"^[A-Z0-9-]*$", ErrorMessage = "The postal code should be 4-10 characters and include numbers, uppercase and '-'")]  
         public string PostalCode { get; set; }
 
+        public decimal? CourtLatitude { get; set; }
 
-
+        public decimal? CourtLongitude { get; set; }
        
         public string Description { get; set; }
 

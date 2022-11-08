@@ -159,7 +159,8 @@ namespace MTLcourts.Pages
                
                 photoUrl = Path.Combine("https://mtlcourtsblob.blob.core.windows.net/mtlcourtscontainer/", _postedFileName);
               }       
-              var newCourt = new MTLcourts.Models.Courts {PhotoUrl = photoUrl, Name = NewCourt.Name, Address = NewCourt.Address, Description = NewCourt.Description, PostalCode = NewCourt.PostalCode, AvgRating = NewCourt.AvgRating };
+              var newCourt = new MTLcourts.Models.Courts {PhotoUrl = photoUrl, Name = NewCourt.Name, Address = NewCourt.Address, Description = NewCourt.Description, 
+              PostalCode = NewCourt.PostalCode, AvgRating = NewCourt.AvgRating, CourtLatitude = NewCourt.CourtLatitude, CourtLongitude = NewCourt.CourtLongitude };
 
               db.Court.Add(newCourt);
 
