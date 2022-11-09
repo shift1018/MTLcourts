@@ -35,12 +35,10 @@ namespace MTLcourts.Pages
         public async Task OnGetAsync()
         {
           LRoles =roleManager.Roles.ToList();
-        //   LUsers = userManager.Users.ToList();
+          
+          LUsers = userManager.Users.ToList();
         }
 
-        
-        
-        
     public async Task<IActionResult> OnPostAsync(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
