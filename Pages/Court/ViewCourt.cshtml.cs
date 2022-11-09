@@ -1,8 +1,11 @@
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MTLcourts.Data;
 using MTLcourts.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace MTLcourts.Pages
 {
@@ -20,21 +23,24 @@ namespace MTLcourts.Pages
 
         [BindProperty(SupportsGet = true)]
         public int Id { get; set; }
-     
+
         public Courts court { get; set; }
 
-        
+        public Ratings rating { get; set; }
+
         public Comments comment { get; set; }
 
-        public List<Comments> courtComments { get; set; }   
+        public List<Comments> courtComments { get; set; }
 
-        public List<Ratings> courtRating { get; set; } 
+        public List<Ratings> courtRating { get; set; }
 
 
         [BindProperty]
+        [Required(ErrorMessage = "Review can not be empty")]
         public string Comment { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "Set your rating to submit")]
         public int Rating { get; set; }
 
         [BindProperty]
@@ -47,108 +53,73 @@ namespace MTLcourts.Pages
 
         }
 
-        // public async Task OnGetAsync()
-        // {
-        //     court = await db.Court.Include(court => court.User).Where(court => court.Id == Id).FirstOrDefaultAsync();
-        //     courtComments = await db.Comments.Where(comment => comment.CourtsId == Id).ToListAsync();
-
-        //     var queryCourtComments = await(
-        //         from c in db.Comments.Where(comment => comment.CourtsId == Id) 
-        //         join u in db.Users 
-        //         on c.User.Id equals u.Id 
-        //             select new 
-        //             {
-        //                 queryComment = c.Comment,
-                                
-        //             });
-        // }
-
-
-
-
         public async Task<IActionResult> OnPostAsync()
         {
-            // if (!ModelState.IsValid)
-            // {
-            //     return Page();
-            // }            
-            var userName = User.Identity.Name; 
-            var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault(); 
-            var courtsId = Id;
-
-            var newComment = new MTLcourts.Models.Comments{
-                CourtsId = courtsId,
-                User = user,
-                DateWhen = DateTime.Now,                
-                Comment = Comment,
-            };
-
-            var newRating = new MTLcourts.Models.Ratings{
-                CourtsId = courtsId,
-                User = user,
-                Rating = Rating
-            };
-
-           //calculate average rating 
-// !!!!!!!!!!! need to fix the query - giving an error
-            // var findUser = await db.Ratings.Where(r => r.CourtsId == Id && r.User.UserName == userName).ToListAsync();
-            // if (findUser != null){
-            //     ModelState.AddModelError(string.Empty, "You already rated this court in the past.");
-            //     return Page();
-            // }else{
-            // var ratingsQuery = await db.Ratings.Where(rating => rating.CourtsId == Id).ToListAsync();
-            // var count = 0;
-            // var sum = 0;
-            // foreach (var rat in ratingsQuery)
-            // {
-            //     sum += rat.Rating;
-            //     count++;
-            // }
-
-            // double AvgRatingNew = Math.Round((double)(sum+Rating)/(double)(count+1), 2); 
-            // court = await db.Court.Where(court => court.Id == Id).FirstOrDefaultAsync();
-            // court.AvgRating = AvgRatingNew;
-
-
-            // db.Comments.Add(newComment);
-            // db.Ratings.Add(newRating);
-            // //db.Court.Update(court.AvgRating = AvgRating1).Where(court => court.Id == Id);
-            // await db.SaveChangesAsync();
-
-            // return RedirectToPage("ViewCourt", Id);                
-            // }
-
-            var findUser = await db.Ratings.Where(r => r.CourtsId == Id && r.User.UserName == userName).ToListAsync();
-            if (findUser != null){
-                ModelState.AddModelError(string.Empty, "You already rated this court in the past.");
-                return Page();
-            }else{
-            var ratingsQuery = await db.Ratings.Where(rating => rating.CourtsId == Id).ToListAsync();
-            var count = 0;
-            var sum = 0;
-            foreach (var rat in ratingsQuery)
+            if (!ModelState.IsValid)
             {
-                sum += rat.Rating;
-                count++;
+                //ModelState.AddModelError(string.Empty, "error");
+                return RedirectToPage("ViewCourt", Id);
             }
+            else
+            {
+                var userName = User.Identity.Name;
+                var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
+                var courtsId = Id;
 
-            double AvgRatingNew = Math.Round((double)(sum+Rating)/(double)(count+1), 2); 
-            court = await db.Court.Where(court => court.Id == Id).FirstOrDefaultAsync();
-            court.AvgRating = AvgRatingNew;
+                var newComment = new MTLcourts.Models.Comments
+                {
+                    CourtsId = courtsId,
+                    User = user,
+                    DateWhen = DateTime.Now,
+                    Comment = Comment,
+                };
+
+                var newRating = new MTLcourts.Models.Ratings
+                {
+                    CourtsId = courtsId,
+                    User = user,
+                    Rating = Rating
+                };
 
 
-            db.Comments.Add(newComment);
-            db.Ratings.Add(newRating);
-            //db.Court.Update(court.AvgRating = AvgRating1).Where(court => court.Id == Id);
-            await db.SaveChangesAsync();
+                rating = await db.Ratings.Where(r => r.CourtsId == Id && r.User.UserName == userName).FirstOrDefaultAsync();
+                var ratingsQuery = await db.Ratings.Where(rating => rating.CourtsId == Id).ToListAsync();
+                var count = 0;
+                var sum = 0;
+                court = await db.Court.Where(court => court.Id == Id).FirstOrDefaultAsync();
+                if (rating != null)
+                {
+                    //ModelState.AddModelError(string.Empty, "You already rated this court. Review only is submitted.");
+                    rating.Rating = Rating;
+                    foreach (var rat in ratingsQuery)
+                    {
+                        sum += rat.Rating;
+                        count++;
+                    }
+                    double AvgRatingNewUpdated = Math.Round((double)sum / (double)count, 2);
+                    court.AvgRating = AvgRatingNewUpdated;
 
-            return RedirectToPage("ViewCourt", Id);                
+                    db.Comments.Add(newComment);
+                    await db.SaveChangesAsync();
+                    return RedirectToPage("ViewCourt", Id);
+                }
+                else
+                {
+                    foreach (var rat in ratingsQuery)
+                    {
+                        sum += rat.Rating;
+                        count++;
+                    }
+                    double AvgRatingNew = Math.Round((double)(sum + Rating) / (double)(count + 1), 2);
+                    court.AvgRating = AvgRatingNew;
+
+                    db.Comments.Add(newComment);
+                    db.Ratings.Add(newRating);
+                    await db.SaveChangesAsync();
+
+                    return RedirectToPage("ViewCourt", Id);
+                }
             }
-
-
         }
-
-
-
     }
 }
