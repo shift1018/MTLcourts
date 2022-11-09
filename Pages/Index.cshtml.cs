@@ -29,6 +29,16 @@ public class IndexModel : PageModel
 
    }
 
+ // GET: Locations
+        // [HttpGet]
+        // public ActionResult map()
+        // {
+        //     var q = (from a in db.Court
+        //     select new { a.Name, a.Description, a.Latitude, a.Longitude, a.Name, a.alertType.IconUrl }).OrderBy(a=>a.Name);
+        // // return PartialView("_map", q.ToList());
+        //     return Json(q, JsonRequestBehavior.AllowGet);
+        // }
+
    
    
 }

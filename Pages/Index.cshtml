@@ -36,22 +36,16 @@
         }
 </div>
 
+
+
 <div class="container">
 <div id="map"></div>
 </div>
 
-<script>
-   $.ajax({
-        url: '/Home/GetBranch', 
-        success: function (data) {
-            console.log(data)
-            $(data).each(function (index, item) {
-                var lat = Court.CourtLatitude;
-                var long = item.branchGeoLocationLong;
-                L.marker([lat, long], { icon: greenIcon }).bindPopup("I am the " + item.branchName +" leaf.").addTo(map);
-            });
-        },
-    });
-</script>
+
+
+
+
+
 
 
