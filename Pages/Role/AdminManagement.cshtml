@@ -10,7 +10,7 @@
 <a class="btn btn-sm btn-primary" asp-page="CreateRole">Create New Role</a>
     
     @foreach (var role in Model.LRoles)
-    {   <h1>Role : @role.Name</h1>
+    {   <h1>Role Name: @role.Name</h1>
         <table class="table table-sm table-bordered table-bordered">
             <tr>
                 <th class="col-6">ID</th>
@@ -41,7 +41,7 @@
                 <th class="col-4">Email</th>
                 
             </tr>
-            @foreach (var user in Model.LUsers)
+             @foreach (var user in Model.LUsers @*userManager.Users*@ ) 
                 {
                     if(await userManager.IsInRoleAsync(user, role.Name)){
 
