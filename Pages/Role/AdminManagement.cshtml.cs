@@ -47,7 +47,7 @@ namespace MTLcourts.Pages
             {
                 IdentityResult result = await roleManager.DeleteAsync(role);
                 if (result.Succeeded)
-                    return RedirectToAction("AdminManagement");
+                    return RedirectToPage("AdminManagement");
                 
             }
             else
@@ -55,7 +55,7 @@ namespace MTLcourts.Pages
 
 
             
-            return RedirectToAction("AdminManagement");
+            return RedirectToPage("AdminManagement");
         }
 
     

@@ -81,7 +81,7 @@
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <script>
+    @* <script>
 
 var map = L.map("map").setView([45.5536, -73.59981], 12);
 
@@ -107,11 +107,15 @@ var markerSaintRoche = L.marker([45.5324, -73.6308])
   .addTo(map);
 
 var markerBeaubien = L.marker([45.5535, -73.59])
-  .bindPopup("Soeur-Madeleine-Gagnon Park")
+  .bindPopup("Beaubien Park")
+  .addTo(map);
+
+  var markerVilleray = L.marker([45.5588, -73.5983])
+  .bindPopup("Villeray Park")
   .addTo(map);
 
     </script>
-  
+   *@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

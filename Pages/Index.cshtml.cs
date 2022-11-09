@@ -4,6 +4,12 @@ using MTLcourts.Data;
 using MTLcourts.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using System.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
 
 namespace MTLcourts.Pages;
 
@@ -14,7 +20,7 @@ public class IndexModel : PageModel
   
 
      private readonly CourtsDbContext db;
-
+  
     public IndexModel(ILogger<IndexModel> logger, CourtsDbContext db)
     {
         _logger = logger;
@@ -22,6 +28,9 @@ public class IndexModel : PageModel
     
     }
     public List<Courts> courtsList { get; set; }
+
+
+    
 
     public async Task OnGetAsync()
    {
@@ -39,6 +48,10 @@ public class IndexModel : PageModel
         //     return Json(q, JsonRequestBehavior.AllowGet);
         // }
 
+
+   
+    }
+
    
    
-}
+
