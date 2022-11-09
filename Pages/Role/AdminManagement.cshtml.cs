@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using MTLcourts.Data;
 using MTLcourts.Models;
-
+using Microsoft.AspNetCore.Authorization;
 namespace MTLcourts.Pages
 {
+
+    [Authorize(Roles = "Admin, Moderator")]
     public class AdminManagementModel : PageModel
     {
         private RoleManager<IdentityRole> roleManager;

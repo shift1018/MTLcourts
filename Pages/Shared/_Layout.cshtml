@@ -34,6 +34,7 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
+                         @* @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin")) { *@
                         @if (signInManager.IsSignedIn(User)) {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Role/AdminManagement">AdminManagement</a>

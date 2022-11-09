@@ -1,11 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MTLcourts.Pages
 {
+    [Authorize(Roles = "Admin, Moderator")]
     public class AddUserToModel : PageModel
     {
+        
+        
+
         [BindProperty(SupportsGet =true)]
         public string Id { get; set; } 
         [BindProperty]
