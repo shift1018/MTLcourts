@@ -87,5 +87,7 @@
     </div>
 
     
-@* <a asp-page="/delete" asp-route-id="@Model.court.Id" class="btn btn-info">Delete</a> *@
+    <a asp-page="/Court/delete" asp-route-id="@Model.court.Id" class="btn btn-info">Delete</a>
+    <a class="btn btn-info" asp-page="/Court/CourtEdit" asp-route-id="@Model.court.Id" >Edit Court</a>
+
 </div>

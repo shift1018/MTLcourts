@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MTLcourts.Data;
 using MTLcourts.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace MTLcourts.Pages
 {

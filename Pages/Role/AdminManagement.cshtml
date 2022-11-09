@@ -1,12 +1,13 @@
 ﻿@page
 @model MTLcourts.Pages.AdminManagementModel
+@inject UserManager<IdentityUser> userManager
 @{
     ViewData["Title"] = "Create New Role";
 }
 
 <h1>All Roles</h1>
 
-<a class="btn btn-sm btn-primary" asp-page="/CreateRole">Create New Role</a>
+<a class="btn btn-sm btn-primary" asp-page="CreateRole">Create New Role</a>
     
     @foreach (var role in Model.LRoles)
     {   <h1>Role : @role.Name</h1>
@@ -21,17 +22,18 @@
                 <td class="col-6">@role.Id</td>
                 <td class="col-2">@role.Name</td>
                 
-                <td class="col-2"><a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">Update</a></td>
+                <th scope="col"><a asp-page="RoleEdit" asp-route-id="@role.Id" class="btn btn-sm btn-primary col-5">Edit</a></th>
+
                 <td class="col-2">
-                    <form asp-action="Delete" asp-route-id="@role.Id" method="post">
-                        <button type="submit" class="btn btn-sm btn-danger">
+                    <form asp-action="Delete" asp-controller="Administration" asp-route-id="@role.Id"  method="post">
+                        <button type="submit" class="btn btn-sm btn-danger col-5">
                             Delete
                         </button>
                     </form>
                 </td>
             </tr>
         </table>
-        <h1>Users in this Role : @role.Name</h1>
+        @* <h1>Users in this Role : @role.Name</h1> *@
         <table class="table table-sm table-bordered table-bordered">
              <tr>
                 <th class="col-6">UserID</th>
@@ -41,14 +43,20 @@
             </tr>
             @foreach (var user in Model.LUsers)
                 {
+                    if(await userManager.IsInRoleAsync(user, role.Name)){
+
+            
                     <tr>
                         <td class="col-6">@user.Id</td>
                         <td class="col-2">@user.UserName</td>
                         <td class="col-4">@user.Email</td>
-                    </tr>    
+                    </tr>  
+                    }   
                 }
                     
         </table>
+        <th scope="col"><a asp-page="AddUserTORole" asp-route-id="@role.Id"  class="btn btn-sm btn-primary col-2">Add Users</a></th>
+        <th scope="col"><a asp-page="RemoveUserfromRole" asp-route-id="@role.Id" class="btn btn-sm btn-primary col-2">Remove Users</a></th>
     }
 
 
