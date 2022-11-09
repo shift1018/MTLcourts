@@ -112,3 +112,11 @@
 - finish maps api
 - begin looking at styling
 3. Need assistance / figure things out
+
+2022/11/09 Anton
+1. Done / not done since last scrum:
+- implemented average rating for the court
+2. To do until next Scrum:
+- complete css for view court page (responsive design)
+3. Need assistance / figure things out
+- display errors (return page()) on the view court page
