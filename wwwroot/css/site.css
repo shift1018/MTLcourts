@@ -19,13 +19,30 @@ body {
 
 .viewCourtContainer {
   min-height: 60rem;
-  border: 1px solid black;
   margin: auto;
+  padding: 0;
+  border: 1px solid black;
 }
 
 .court-image-container {
-  border: 1px solid black;
-  text-align: center;
+  margin:0;
+  padding: 2rem 4rem 2rem 0;
+  text-align: right;
+  color:rgb(250, 246, 242); 
+  background-image: url("https://mtlcourtsblob.blob.core.windows.net/mtlcourtscontainer/bg2.JPG");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.court-info-container {
+  padding-top: 1rem;
+  text-align: right;
+  font-size: 18px;
+}
+
+.court-name,
+.court-rating{
+  color: rgb(248, 142, 66);
 }
 
 .comments-rating {
@@ -34,19 +51,37 @@ body {
 
 .review-text-container {
   margin: 0 10rem 0 10rem;
-  border: 1px solid black;
+}
+
+.court-reviews-container{
+  margin: 0 2rem 0 2rem;
+}
+
+.form-control:focus {
+  border-color: rgb(248, 142, 66);
+  box-shadow: 0 0 0 0.2rem rgba(248, 142, 66, 0.40);
 }
 
 .view-court-image {
   height: 150%;
   width: auto;
+  border: 2px solid rgb(248, 142, 66);
+  box-shadow: 0 4px 8px 0 rgb(248, 142, 66, 0.2), 0 6px 20px 0 rgba(248, 142, 66, 0.19);
 }
 
-.court-info-container {
-  border: 1px solid black;
-  padding-top: 2rem;
-  text-align: center;
-  font-size: 20px;
+.button-submit{
+  background-color: rgb(248, 142, 66);
+  color:rgb(70, 70, 66);
+  height: 80px;
+  border-color: black;
+  border-radius: 40px;
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+.button-submit:hover{
+  background-color: rgb(70, 70, 66);
+  color:rgb(248, 142, 66);
 }
 
 .player-reviews {
@@ -60,11 +95,22 @@ body {
   margin: 2rem;
 }
 
+.nav-item{
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+.nav-link:hover,
+.nav-item:hover{
+  background-color: rgb(248, 142, 66);
+  border-radius: 5px;
+}
+
+
 /* star-rating css */
 
 
 .rating-container {
-  border: 1px solid black;
   display: inline-block;
 }
 
@@ -72,7 +118,7 @@ body {
   font-size: 0;
   white-space: nowrap;
   display: inline-block;
-  width: 252px;
+  width: 248px;
   height: 50px;
   overflow: hidden;
   position: relative;

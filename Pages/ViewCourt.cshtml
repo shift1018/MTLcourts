@@ -1,91 +1,80 @@
 ﻿@page "{Id:int}"
 @model MTLcourts.Pages.ViewCourtModel
+@inject SignInManager<IdentityUser> signInManager;
 
 @{
-    
+    ViewData["Title"] = "View Court";
 }
 
 <div class="container viewCourtContainer">
     <div class="court-image-container">
-        <img class="view-court-image" src="/@Model.court.PhotoUrl" alt="basketball court photo">
+        <div>
+            <img class="view-court-image" src="/@Model.court.PhotoUrl" alt="basketball court photo">
+        </div>
+        <div class="court-info-container">
+            <h2 class="court-name"><b>@Model.court.Name</b></h2>
+            <p class=""><b>Address:</b> @Model.court.Address</p>
+            <h4 class="court-rating"><b>Rating:</b> @Model.court.AvgRating</h4><br>
+            <p class="">@Model.court.Description</p>
+        </div>
     </div>
-    <div class="court-info-container">
-        <h2 class=""><b>@Model.court.Name</b></h2>
-        <p class=""><b>Address:</b> @Model.court.Address</p>        
-        <h4 class=""><b>Rating:</b> @Model.court.AvgRating</h4><br>
-        <p class="">@Model.court.Description</p>
-    </div>
+
     <div class="comments-rating">
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
-            
-            <div class="form-group row rating-container">
-                <h4>Your rating</h4>
-                <span class="star-rating">
-                    <input class="form-radio-input" value="1" type="radio" asp-for="Rating" /><i></i>
-                    <input class="form-radio-input" value="2" type="radio" asp-for="Rating" /><i></i> 
-                    <input class="form-radio-input" value="3" type="radio" asp-for="Rating" /><i></i> 
-                    <input class="form-radio-input" value="4" type="radio" asp-for="Rating" /><i></i> 
-                    <input class="form-radio-input" value="5" type="radio" asp-for="Rating" /><i></i>
-                </span>
-            </div>
-            <br><br>
-
-            @* <div class="form-group row rating-container">
-                <h4>Your rating</h4>
-                <label asp-for="Rating" class="rating-radio-button">
-                    <input class="form-radio-input" value="1" type="radio" asp-for="Rating" /> 1
-                </label>
-                <label asp-for="Rating" class="rating-radio-button">
-                    <input class="form-radio-input" value="2" type="radio" asp-for="Rating" /> 2
-                </label>
-                <label asp-for="Rating" class="rating-radio-button">
-                    <input class="form-radio-input" value="3" type="radio" asp-for="Rating" /> 3
-                </label>
-                <label asp-for="Rating" class="rating-radio-button">
-                    <input class="form-radio-input" value="4" type="radio" asp-for="Rating" /> 4
-                </label>
-                <label asp-for="Rating" class="rating-radio-button">
-                    <input class="form-radio-input" value="4" type="radio" asp-for="Rating" /> 5
-                </label>
-
-                <div class="col-sm-10">
-                    <span asp-validation-for="Rating" class="text-danger"></span>
+            @if (signInManager.IsSignedIn(User))
+            {
+                <div class="form-group row rating-container">
+                    <h4>Your rating</h4>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="star-rating">
+                        <input class="form-radio-input" value="1" type="radio" asp-for="Rating" /><i></i>
+                        <input class="form-radio-input" value="2" type="radio" asp-for="Rating" /><i></i>
+                        <input class="form-radio-input" value="3" type="radio" asp-for="Rating" /><i></i>
+                        <input class="form-radio-input" value="4" type="radio" asp-for="Rating" /><i></i>
+                        <input class="form-radio-input" value="5" type="radio" asp-for="Rating" /><i></i>
+                    </span>
+                    <span asp-validation-for="Rating" class=text-danger></span>
                 </div>
-            </div> *@
-
-            <div class="form-group row">
-                <h4>Your review</h4>
-                <div class="col review-text-container">
-                    <textarea asp-for="Comment" class="form-control"></textarea>
-                    <span asp-validation-for="Comment" class="text-danger"></span>
+                <br><br>
+                <div class="form-group row">
+                    <h4>Your review</h4>
+                    <div class="col review-text-container">
+                        <textarea asp-for="Comment" class="form-control your-review-textarea"></textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-submit button-submit">Submit</button>
+                </div>
+            }
         </form>
     </div>
-    <br><br><hr>
-    <h2>Player Reviews</h2>
-    <hr>
-    <div class="player-reviews">
-        @foreach (var courtComments in Model.courtComments)
-        {
-        <div class="row">        
-            <div class="col-3">
-                <p>@courtComments.User</p>  
-                <p><i>@courtComments.DateWhen</i></p>  
-            </div>
-            <div class="col">
-              <p>@courtComments.Comment</p>  
-            </div>
+    <br><br>
+    <div class="court-reviews-container">
+    <hr>    
+    <h2>Court Reviews</h2>
+    <hr>        
+        <div class="player-reviews">
+            @foreach (var courtComments in Model.courtComments)
+            {
+                <div class="row">
+                    <div class="col-3">
+                        <p>@courtComments.User</p>
+                        <p><i>@courtComments.DateWhen.ToString($"{0:dd/MM/yyyy}")</i></p>
+                    </div>
+                    <div class="col">
+                        <p>@courtComments.Comment</p>
+                    </div>
+                </div>
+                <hr>
+            }
         </div>
-        <hr>        
-        }
     </div>
 
-    
-@* <a asp-page="/delete" asp-route-id="@Model.court.Id" class="btn btn-info">Delete</a> *@
+
+
+
+    @* <a asp-page="/delete" asp-route-id="@Model.court.Id" class="btn btn-info">Delete</a> *@
 </div>
