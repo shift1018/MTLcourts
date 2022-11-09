@@ -11,7 +11,7 @@
      <br>
      <h5>Are you sure you want to delete this record?</h5>
      <br>
-     <a asp-page="/ViewCourt" asp-route-id="@Model.Court.Id" class="btn btn-info mr-4">Cancel</a>
+     <a asp-page="/Court/ViewCourt" asp-route-id="@Model.Court.Id" class="btn btn-info mr-4">Cancel</a>
      <br><br>
      <form method="POST">
            <input type="hidden" asp-for="Court.Id" />

@@ -72,6 +72,7 @@ namespace MTLcourts.Pages
                 if (result.Succeeded) {
                     // If succeeded, logging a message into a log with severity
                     logger.LogInformation($"User {Input.UserName} created a new account with password");
+                    var result_role = await userManager.AddToRoleAsync(user, "user");
                     // adding a parameter into the url of registersuccess page (can now say "youve registered with this email" click to login)
                     return RedirectToPage("RegisterSuccess", new {UserName = Input.UserName});
                 }
