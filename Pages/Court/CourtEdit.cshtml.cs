@@ -8,33 +8,18 @@ using Azure.Storage.Blobs.Models;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Azure;
-
 namespace MTLcourts.Pages
-
 {
-
-    //Only allows logged in users to access this page
-
-     [Authorize]
-
-    public class AddCourtModel : PageModel
-
+    public class CourtEditModel : PageModel
     {
 
-      
+        private CourtsDbContext db;
+ private readonly ILogger<RegisterModel> logger;
 
-         private CourtsDbContext db;
-
-         private readonly ILogger<RegisterModel> logger;
-
-
-
-         private IWebHostEnvironment _environment;
+ private IWebHostEnvironment _environment;
          private readonly IConfiguration _configuration;
 
-
-
-         public AddCourtModel(CourtsDbContext db, ILogger<RegisterModel> logger, IWebHostEnvironment environment, IConfiguration configuration ) {
+         public CourtEditModel(CourtsDbContext db, ILogger<RegisterModel> logger, IWebHostEnvironment environment, IConfiguration configuration ) {
 
             this.db = db;
 
@@ -46,26 +31,29 @@ namespace MTLcourts.Pages
 
         }
 
+public Courts EditCourt { get; set; }
 
+         public async Task<IActionResult> OnGetAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-         [BindProperty]
+            EditCourt = db.Court.FirstOrDefault(m => m.Id == id);
 
-        public Courts NewCourt { get; set; }
+            if (EditCourt == null)
+            {
+                return NotFound();
+            }
+            return Page();
+        }
 
-
-
-        [BindProperty]
-
-        public IFormFile Upload { get; set; }
+ public IFormFile Upload { get; set; }
 
         [BindProperty]
         public List<BlobItem> BlobList { get; set; }
-
-       
-        
-
-
-        public async Task<IActionResult> OnPostAsync()
+public async Task<IActionResult> OnPostAsync()
 
         {
 
@@ -159,10 +147,10 @@ namespace MTLcourts.Pages
                
                 photoUrl = Path.Combine("https://mtlcourtsblob.blob.core.windows.net/mtlcourtscontainer/", _postedFileName);
               }       
-              var newCourt = new MTLcourts.Models.Courts {PhotoUrl = photoUrl, Name = NewCourt.Name, Address = NewCourt.Address, Description = NewCourt.Description, 
-              PostalCode = NewCourt.PostalCode, AvgRating = NewCourt.AvgRating, CourtLatitude = NewCourt.CourtLatitude, CourtLongitude = NewCourt.CourtLongitude };
+              var editCourt = new MTLcourts.Models.Courts {PhotoUrl = photoUrl, Name = EditCourt.Name, Address = EditCourt.Address, Description = EditCourt.Description, 
+              PostalCode = EditCourt.PostalCode, AvgRating = EditCourt.AvgRating, CourtLatitude = EditCourt.CourtLatitude, CourtLongitude = EditCourt.CourtLongitude };
 
-              db.Court.Add(newCourt);
+              db.Court.Add(EditCourt);
 
               await db.SaveChangesAsync();
 
@@ -174,12 +162,13 @@ namespace MTLcourts.Pages
 
         }
 
-        public void OnGet()
 
-        {
 
-        }
+
+
+
+
+
 
     }
-
 }

@@ -21,14 +21,14 @@
     <div class="card h-100">
          @if (crt.PhotoUrl != null)
         {
-          <a asp-page="/ViewCourt" asp-route-id="@crt.Id" >
+          <a asp-page="/Court/ViewCourt" asp-route-id="@crt.Id" >
       <img src="@crt.PhotoUrl"   class="card-img-top" alt="...">
           </a>
         }
       <div class="card-body">
         <h5 class="card-title">@crt.Name</h5>
         <p class="card-text">@crt.Description</p>
-        <a class="btn btn-light" asp-page="/ViewCourt" asp-route-id="@crt.Id" >View Court</a>
+        <a class="btn btn-light" asp-page="/Court/ViewCourt" asp-route-id="@crt.Id" >View Court</a>
       </div>
     
     </div>
