@@ -35,7 +35,7 @@ namespace MTLcourts.Pages
         public async Task OnGetAsync()
         {
           LRoles =roleManager.Roles.ToList();
-          LUsers = userManager.Users.ToList();
+        //   LUsers = userManager.Users.ToList();
         }
 
         
@@ -44,6 +44,7 @@ namespace MTLcourts.Pages
     public async Task<IActionResult> OnPostAsync(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
+            
             if (role != null)
             {
                 IdentityResult result = await roleManager.DeleteAsync(role);
@@ -53,7 +54,14 @@ namespace MTLcourts.Pages
             }
             else
                 ModelState.AddModelError("", "No role found");
+
+
+            
             return RedirectToAction("AdminManagement");
         }
+
+    
+
+    
     }
 }
