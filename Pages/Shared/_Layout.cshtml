@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
     <title>@ViewData["Title"] - MTLcourts</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -35,13 +36,15 @@
                     </ul>
                     <ul class="navbar-nav ml-auto">
                          @* @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin")) { *@
-                        @if (signInManager.IsSignedIn(User)) {
+                        @if (signInManager.IsSignedIn(User)&& User.IsInRole("Admin")) {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Role/AdminManagement">AdminManagement</a>
-                        </li>
+                        </li>}
+                         @if (signInManager.IsSignedIn(User)&& !User.IsInRole("User")) {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Court/AddCourt">Add Court</a>
-                        </li>
+                        </li>}
+                         @if (signInManager.IsSignedIn(User) ){
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Log out</a>
                         </li>
