@@ -49,6 +49,9 @@ namespace MTLcourts.Pages
         public async Task OnGetAsync()
         {
             court = await db.Court.Include(court => court.User).Where(court => court.Id == Id).FirstOrDefaultAsync();
+            if (court == null) {
+                        // FIXME
+            }
             courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
 
         }
@@ -58,7 +61,8 @@ namespace MTLcourts.Pages
             if (!ModelState.IsValid)
             {
                 //ModelState.AddModelError(string.Empty, "error");
-                return RedirectToPage("ViewCourt", Id);
+//                return RedirectToPage("ViewCourt", Id);
+                return Page();
             }
             else
             {
