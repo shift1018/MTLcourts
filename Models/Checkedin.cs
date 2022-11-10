@@ -20,6 +20,8 @@ namespace MTLcourts.Models
         [Required]
         public DateTime Date { get; set; }
 
+         public bool IsCheckedIn { get; set; }
+
         [Range (1, 20)]
         [RegularExpression(@"[1-9]", ErrorMessage = "The number of people should be between 1 and 20")]
         public int NumCheckedIn { get; set; }
