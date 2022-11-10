@@ -1,4 +1,5 @@
 ﻿@page "{Id:int}"
+@using System.Net
 @model MTLcourts.Pages.ViewCourtModel
 @inject SignInManager<IdentityUser> signInManager;
 
@@ -15,7 +16,7 @@
             <h2 class="court-name"><b>@Model.court.Name</b></h2>
             <p class="">@Model.court.Address</p>
             <h4 class="court-rating"><b>Rating:</b> @Model.court.AvgRating</h4>
-            <p class="view-court-description">@Model.court.Description</p>
+            <p class="view-court-description">@Html.Raw(WebUtility.HtmlDecode(@Model.court.Description))</p>
         </div>
     </div>
 

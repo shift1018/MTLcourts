@@ -31,6 +31,10 @@ nav{
   font-size: 16px;
 }
 
+.display-4{
+  color: rgb(250, 246, 242);
+}
+
 html {
   position: relative;
   min-height: 100%;

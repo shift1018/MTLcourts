@@ -124,6 +124,9 @@ namespace MTLcourts.Pages
                     return RedirectToPage("ViewCourt", Id);
                 }
             }
+
+            
         }
+        
     }
 }
