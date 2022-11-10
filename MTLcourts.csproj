@@ -6,13 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>36c56d8e-302c-40bc-a37b-dea3b31a7cab</UserSecretsId>
   </PropertyGroup>
-  <!-- <PropertyGroup Condition=" '$(Configuration)' == '' Or '$(Configuration)' == 'Debug'">
+  <PropertyGroup Condition=" '$(Configuration)' == '' Or '$(Configuration)' == 'Debug'">
   <EnvironmentName>Development</EnvironmentName>
-  </PropertyGroup> -->
-
+  </PropertyGroup>
+<!-- 
   <PropertyGroup Condition=" '$(Configuration)' != '' AND '$(Configuration)' != 'Debug' ">
     <EnvironmentName>Production</EnvironmentName>
-  </PropertyGroup>
+  </PropertyGroup> -->
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.14.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
