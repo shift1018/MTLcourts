@@ -15,7 +15,7 @@ namespace MTLcourts.Pages
 
     //Only allows logged in users to access this page
 
-     [Authorize]
+     [Authorize(Roles = "Admin")]
     //  [Authorize(Roles = "Admin")]
 
     public class AddCourtModel : PageModel

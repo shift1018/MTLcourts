@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
     <title>@ViewData["Title"] - MTLcourts</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -36,13 +37,16 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
-                        @if (signInManager.IsSignedIn(User)) {
+                         @* @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin")) { *@
+                        @if (signInManager.IsSignedIn(User)&& User.IsInRole("Admin")) {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Role/AdminManagement">AdminManagement</a>
-                        </li>
+                        </li>}
+                         @if (signInManager.IsSignedIn(User)&& !User.IsInRole("User")) {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Court/AddCourt">Add Court</a>
-                        </li>
+                        </li>}
+                         @if (signInManager.IsSignedIn(User) ){
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Log out</a>
                         </li>
@@ -83,7 +87,7 @@
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <script>
+    @* <script>
 
 var map = L.map("map").setView([45.5536, -73.59981], 12);
 
@@ -109,11 +113,15 @@ var markerSaintRoche = L.marker([45.5324, -73.6308])
   .addTo(map);
 
 var markerBeaubien = L.marker([45.5535, -73.59])
-  .bindPopup("Soeur-Madeleine-Gagnon Park")
+  .bindPopup("Beaubien Park")
+  .addTo(map);
+
+  var markerVilleray = L.marker([45.5588, -73.5983])
+  .bindPopup("Villeray Park")
   .addTo(map);
 
     </script>
-  
+   *@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

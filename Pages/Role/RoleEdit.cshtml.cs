@@ -11,7 +11,7 @@ namespace MTLcourts.Pages
     {
         [BindProperty(SupportsGet =true)]
         public string Id { get; set; }
-        [BindProperty(SupportsGet =true)]
+        [BindProperty]
         public string Name { get; set; }
 
         private RoleManager<IdentityRole> roleManager;
@@ -26,7 +26,11 @@ namespace MTLcourts.Pages
            role =await roleManager.FindByIdAsync(Id);
            Name = role.Name;
         }
-
+        // public void OnGet(string Id)
+        // {
+        //    role =roleManager.GetRoleIdAsync(Id);
+        //    Name = role.Name;
+        // }
         
         
     public async Task<IActionResult> OnPostAsync(string id)
