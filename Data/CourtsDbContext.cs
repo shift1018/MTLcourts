@@ -17,6 +17,8 @@ namespace MTLcourts.Data
 
             public DbSet<Comments> Comments { get; set; }
 
+            public DbSet<Checkedin> Checkedin { get; set; }
+
         // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         // {
         //     optionsBuilder.UseSqlServer(@"Data source=mtlcourtsdb.db");

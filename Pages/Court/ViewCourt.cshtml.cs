@@ -15,6 +15,8 @@ namespace MTLcourts.Pages
 
         private readonly CourtsDbContext db;
 
+
+
         public ViewCourtModel(ILogger<IndexModel> logger, CourtsDbContext db)
         {
             _logger = logger;
@@ -29,6 +31,11 @@ namespace MTLcourts.Pages
         public Ratings rating { get; set; }
 
         public Comments comment { get; set; }
+
+        public Checkedin checkedin { get; set; }
+
+
+        
 
         public List<Comments> courtComments { get; set; }
 
@@ -46,6 +53,9 @@ namespace MTLcourts.Pages
         [BindProperty]
         public double AvgRating { get; set; }
 
+        [BindProperty]
+        public bool IsCheckedIn { get; set; }
+
         public async Task OnGetAsync()
         {
             court = await db.Court.Include(court => court.User).Where(court => court.Id == Id).FirstOrDefaultAsync();
@@ -55,6 +65,24 @@ namespace MTLcourts.Pages
             courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
 
         }
+
+        // public async Task<IActionResult> OnPostAsync2()
+        // {
+        //      if (!ModelState.IsValid)
+        //     {
+        //         return Page();
+        //     }
+          
+        //      db.Checkedin.Add(checkedin);
+
+        //     // db.SaveChanges() --> without Async;
+        //     //perform the insert
+        //     await db.SaveChangesAsync();
+
+        //     // redirect to different URL
+        //     return Page();
+        // }
+        
 
         public async Task<IActionResult> OnPostAsync()
         {
