@@ -120,3 +120,15 @@
 - complete css for view court page (responsive design)
 3. Need assistance / figure things out
 - display errors (return page()) on the view court page
+
+
+2022/11/09 Xin Shi
+1. Done / not done since last scrum:
+- Fixed the user and role table issues
+- Basic Authourization for (Admin, moderator, user)
+- Hiden part of the Navigation according to different roles 
+- Add signin with google
+2. To do until next Scrum:
+- Still have issues in deploying app to azure web services
+3. Need assistance / figure things out
+- Continue with the issues 
