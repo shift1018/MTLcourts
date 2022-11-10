@@ -142,6 +142,18 @@
 - begin looking at styling
 3. Need assistance / figure things out
 
+2022/11/10 Anton
+1. Done / not done since last scrum:
+- completed css for view court page (responsive design)
+- completed css for index page
+- fixed rich text display as normal text
+- developed a logo 
+2. To do until next Scrum:
+- implement nearest court search option on index page
+- complete css for registration and login pages
+3. Need assistance / figure things out
+- display errors (return page()) on the view court page
+
 2022/11/10 Alex
 1. Done / not done since last scrum:
 - working on checkin
