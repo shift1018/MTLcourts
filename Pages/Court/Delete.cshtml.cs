@@ -32,7 +32,7 @@ namespace MTLcourts.Pages
             db.Court.Remove(CourtFromDB);
             await db.SaveChangesAsync();
 
-            return RedirectToPage("/DeleteSuccess");
+            return RedirectToPage("DeleteSuccess");
         }
     }
 }

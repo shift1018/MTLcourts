@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MTLcourts.Pages
 {
+    [Authorize(Roles = "Admin, Moderator")]
     public class AddUserTORoleModel : PageModel
     {
         [BindProperty(SupportsGet =true)]
@@ -38,20 +40,23 @@ namespace MTLcourts.Pages
             Role =await roleManager.FindByIdAsync(Id);
             var LUsers = userManager.Users.ToList() ;
 
+                var user1 =await userManager.FindByIdAsync("cdb87882-08dd-4829-b964-4c014e7621b0");
+var result = await userManager.AddToRoleAsync(user1, "Moderator");
+            // foreach(var user in LUsers){
 
-            foreach(var user in LUsers){
-                var userRoleModel = new UserRoleModel{
-                    UserId = user.Id,
-                    UserName= user.UserName,
-                    UserEmail= user.Email
-                };
-                if(await userManager.IsInRoleAsync(user, Role.Name)){
-                    userRoleModel.IsSelected = true;
-                }   else{
-                userRoleModel.IsSelected = false;
-                }
-                userRole.Add(userRoleModel);
-            }
+
+            //     var userRoleModel = new UserRoleModel{
+            //         UserId = user.Id,
+            //         UserName= user.UserName,
+            //         UserEmail= user.Email
+            //     };
+            //     if(await userManager.IsInRoleAsync(user, Role.Name)){
+            //         userRoleModel.IsSelected = true;
+            //     }   else{
+            //     userRoleModel.IsSelected = false;
+            //     }
+            //     userRole.Add(userRoleModel);
+            // }
            
         }
   

@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using MTLcourts.Data;
 using MTLcourts.Models;
-
+using Microsoft.AspNetCore.Authorization;
 namespace MTLcourts.Pages
 {
+
+    [Authorize(Roles = "Admin, Moderator")]
     public class AdminManagementModel : PageModel
     {
         private RoleManager<IdentityRole> roleManager;
@@ -47,7 +49,7 @@ namespace MTLcourts.Pages
             {
                 IdentityResult result = await roleManager.DeleteAsync(role);
                 if (result.Succeeded)
-                    return RedirectToAction("AdminManagement");
+                    return RedirectToPage("AdminManagement");
                 
             }
             else
@@ -55,7 +57,7 @@ namespace MTLcourts.Pages
 
 
             
-            return RedirectToAction("AdminManagement");
+            return RedirectToPage("AdminManagement");
         }
 
     
