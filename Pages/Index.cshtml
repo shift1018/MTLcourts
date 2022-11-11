@@ -48,16 +48,34 @@
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script type="text/javascript">
-  function lonlat() {
-
+  @* function lonlat() {
     var input = document.getElementById('zipInput');
-
     var zipCode = input.value;
     var xhr = $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + zipCode + '&key=AIzaSyAbu_OdJLEzphQg3pIcJ5S7bL8IkWeZt1A');
 
     xhr.done(function (data) {
       console.log('Latitude = ' + data.results[0].geometry.location.lat + ' ' + '<br>Longitude = ' + data.results[0].geometry.location.lng);
-    });
+    }); *@
+    function lonlat() {
+      var input = document.getElementById('zipInput');
+      var zipCode = input.value;
+      var apiResult = $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + zipCode + '&key=AIzaSyAbu_OdJLEzphQg3pIcJ5S7bL8IkWeZt1A');
+      var lat;
+      var lon;
+    @* apiResult.done(function (data) {
+      console.log('Latitude = ' + data.results[0].geometry.location.lat + ' ' + '<br>Longitude = ' + data.results[0].geometry.location.lng);
+    }); *@
+        $.ajax({
+        type: 'POST',
+        url: "/?handler=GeoData",
+        data: JSON.apiResult,
+        contentType: "application/json",
+        dataType: "json",
+    }).done(function(data) {
+        lat = data.results[0].geometry.location.lat;
+        lon = data.results[0].geometry.location.lng;
+        console.log(lat, lon);
+    })
 
   }
 
