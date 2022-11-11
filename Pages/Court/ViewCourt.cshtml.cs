@@ -71,9 +71,6 @@ namespace MTLcourts.Pages
 
         public async Task<IActionResult> OnPostAsyncCheckin()
         {
-            court = await db.Court.Where(court => court.Id == Id).FirstOrDefaultAsync();
-
-            courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
             // Date = @DateTime.Now;
             // DateTime dt = Date.Add(Time.TimeOfDay);
             var userName = User.Identity.Name;
@@ -82,6 +79,9 @@ namespace MTLcourts.Pages
 
              if (!ModelState.IsValid)
             {
+                court = await db.Court.Where(court => court.Id == Id).FirstOrDefaultAsync();
+                courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
+                ModelState.AddModelError(string.Empty, "error");
                 return Page();
             }
             else
@@ -93,15 +93,16 @@ namespace MTLcourts.Pages
                db.Checkedin.Add(newCheckin);
 
               await db.SaveChangesAsync();
-
-              return RedirectToAction("Get");
+            
+            return RedirectToPage("ViewCourt", Id);
+            //   return RedirectToAction("Get");
               
             } 
             
         }
         
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsyncRating()
         {
             if (!ModelState.IsValid)
             {

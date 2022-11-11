@@ -52,7 +52,7 @@
 
     
     <div class="comments-rating">
-        <form method="post" enctype="multipart/form-data" >
+        <form method="post" asp-page-handler="Rating" enctype="multipart/form-data" >
             <div asp-validation-summary="All" class="text-danger"></div>
             @if (signInManager.IsSignedIn(User))
             {
