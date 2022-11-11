@@ -1,4 +1,5 @@
 ﻿@page "{Id:int}"
+@using System.Net
 @model MTLcourts.Pages.ViewCourtModel
 @inject SignInManager<IdentityUser> signInManager;
 
@@ -9,23 +10,46 @@
 <div class="container viewCourtContainer">
     <div class="court-image-container">
         <div>
-            <img class="view-court-image" height="400" width="550" src="@Model.court.PhotoUrl" alt="basketball court photo">
+            <img class="img-responsive img-thumbnail" src="@Model.court.PhotoUrl" alt="basketball court photo">
         </div>
         <div class="court-info-container">
             <h2 class="court-name"><b>@Model.court.Name</b></h2>
-            <p class=""><b>Address:</b> @Model.court.Address</p>
-            <h4 class="court-rating"><b>Rating:</b> @Model.court.AvgRating</h4><br>
-            <p class="">@Model.court.Description</p>
+            <p class="">@Model.court.Address</p>
+            <h4 class="court-rating"><b>Rating:</b> @Model.court.AvgRating</h4>
+            <p class="view-court-description">@Html.Raw(WebUtility.HtmlDecode(@Model.court.Description))</p>
         </div>
     </div>
 
-    <div class="comments-rating">
-        <form method="post" enctype="multipart/form-data">
+@* 
+    <div>
+         <form method="post" >
             <div asp-validation-summary="All" class="text-danger"></div>
             @if (signInManager.IsSignedIn(User))
             {
                 <div class="form-group row rating-container">
-                    <h4>Your rating</h4>
+                    <h4>Let others know you're on the court</h4>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                <br><br>
+                <div class="form-group row">
+                    <label for="Checkedin" asp-for="IsCheckedIn"> CheckedIn</label><br>
+                    <input type="checkbox" asp-for="IsCheckedIn" id="Checkedin" name="Checkedin" value="true" type="hidden">
+                 </div>
+                <div class="form-group">
+                    <button type="submit" asp-for="IsCheckedIn" asp-page-handler="OnPostAsync2" class="btn btn-primary btn-submit button-submit">Check In</button>
+                </div>
+            }
+        </form>
+    </div> *@
+
+    
+    <div class="comments-rating">
+        <form method="post" enctype="multipart/form-data" >
+            <div asp-validation-summary="All" class="text-danger"></div>
+            @if (signInManager.IsSignedIn(User))
+            {
+                <div class="form-group row rating-container">
+                    <h4>Your Rating</h4>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="star-rating">
                         <input class="form-radio-input" value="1" type="radio" asp-for="Rating" /><i></i>
@@ -38,7 +62,7 @@
                 </div>
                 <br><br>
                 <div class="form-group row">
-                    <h4>Your review</h4>
+                    <h4>Your Review</h4>
                     <div class="col review-text-container">
                         <textarea asp-for="Comment" class="form-control your-review-textarea"></textarea>
                         <span asp-validation-for="Comment" class="text-danger"></span>
@@ -46,8 +70,13 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-submit button-submit">Submit</button>
+                    <button type="submit" asp-page-handler="OnPostAsync" class="btn btn-primary btn-submit button-submit">Submit</button>
                 </div>
+                 @* <div class="form-group row">
+                    <label for="Checkedin" asp-for="Checkedin.IsCheckedIn"> CheckedIn</label><br>
+                    <input type="checkbox" asp-for="Checkedin.IsCheckedIn" id="Checkedin" name="Checkedin" value="CheckedIn">
+                    
+                 </div> *@
             }
         </form>
     </div>
@@ -61,7 +90,7 @@
             {
                 <div class="row">
                     <div class="col-3">
-                        <p>@courtComments.User</p>
+                        <h6>@courtComments.User</h6>
                         <p><i>@courtComments.DateWhen.ToString($"{0:dd/MM/yyyy}")</i></p>
                     </div>
                     <div class="col">
@@ -72,9 +101,10 @@
             }
         </div>
     </div>
-
-
-    <a asp-page="/Court/delete" asp-route-id="@Model.court.Id" class="btn btn-info">Delete</a>
-    <a class="btn btn-info" asp-page="/Court/CourtEdit" asp-route-id="@Model.court.Id">Edit Court</a>
-
+    <br>
+    <div class="del-edit-btn-container">
+        <a asp-page="/Court/delete" asp-route-id="@Model.court.Id" class="btn btn-info">Delete Court</a>
+        <a class="btn btn-info" asp-page="/Court/CourtEdit" asp-route-id="@Model.court.Id">Edit Court</a>
+    </div>
+ 
 </div>

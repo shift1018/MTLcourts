@@ -4,6 +4,7 @@ using MTLcourts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MTLcourts.Data.Migrations
 {
     [DbContext(typeof(CourtsDbContext))]
-    partial class CourtsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221109174904_CheckedIn")]
+    partial class CheckedIn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,8 +241,8 @@ namespace MTLcourts.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsCheckedIn")
-                        .HasColumnType("bit");
+                    b.Property<int>("IsCheckedIn")
+                        .HasColumnType("int");
 
                     b.Property<int>("NumCheckedIn")
                         .HasColumnType("int");
