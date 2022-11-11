@@ -1,4 +1,4 @@
-﻿@page "{Id}"
+﻿@* @page "{Id}"
 @model MTLcourts.Pages.AddUserTORoleModel
 @{
 }
@@ -23,7 +23,7 @@
                     <td class="col-4">@user.UserId</td>
                     <td class="col-3">@user.UserName</td>
                     <td class="col-3">@user.UserEmail</td>
-                </tr>    
+                </tr>     *@
             @* <div class="form-group row">
             <label asp-for="@user.IsSelected" class="col-1" ></label>
             <label asp-for="@user.UserId" class=" col-5"></label>
@@ -32,7 +32,7 @@
             <input type="checkbox" asp-for="@user.IsSelected" class="col-1" />
             <input asp-for="@user.UserId" class=" col-5" />     
             </div> *@
-        
+@*         
             }
                     
     </table> 
@@ -42,4 +42,4 @@
 
     <button type="submit" class="btn btn-primary col-2" >update</button>
     <th scope="col"></th><a asp-page="AdminManagement"  class="btn btn-primary col-2">Cancel</a></th>
-    </form>
+    </form> *@
