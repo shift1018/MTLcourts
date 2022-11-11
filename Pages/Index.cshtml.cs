@@ -38,6 +38,14 @@ public class IndexModel : PageModel
 
    }
 
+
+    public void OnPostGeoData(){
+        Console.Write("Hello");
+    }
+
+
+
+
  // GET: Locations
         // [HttpGet]
         // public ActionResult map()
