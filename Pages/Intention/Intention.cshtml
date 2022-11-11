@@ -1,0 +1,33 @@
+﻿@page
+@model MTLcourts.Pages.IntentionModel
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@* @using Bootstrap_DatePicker_Razor_Core.Pages; *@
+@{
+}
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var crt in Model.courtsList)
+        {
+  <div class="col">
+    
+    <div class="card h-100">
+         @if (crt.PhotoUrl != null)
+        {
+          <div class="index-court-image-container">
+            <a asp-page="/Court/ViewCourt" asp-route-id="@crt.Id" >
+              <img class="index-court-image" src="@crt.PhotoUrl"  class="card-img-top" alt="...">
+            </a>            
+          </div>
+        }
+      <div class="card-body">
+        <h5 class="card-title">@crt.Name</h5>
+      
+      </div>
+    
+    </div>
+  </div>
+        }
+</div>
+
+

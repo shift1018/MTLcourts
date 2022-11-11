@@ -1,0 +1,31 @@
+﻿@page
+@model MTLcourts.Pages.NEWModel
+@{
+}
+
+
+DateTime: <input class="form-control" asp-for="DateTime" />
+
+   @* <form method="post">
+        <input type="text" id="txtSelectedDate" name="SelectedDate" readonly="readonly"/>
+        <input type="submit" value="Submit" asp-page-handler="Submit"/>
+ 
+        <script type="text/javascript">
+            $(function () {
+                $('#txtSelectedDate').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    format: "dd/mm/yyyy",
+                    language: "tr"
+                });
+            });
+        </script>
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <script type="text/javascript">
+                $(function () {
+                    alert("@Model.Message");
+                });
+            </script>
+        }
+    </form> *@
