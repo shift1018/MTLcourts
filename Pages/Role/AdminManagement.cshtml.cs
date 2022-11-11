@@ -38,12 +38,14 @@ namespace MTLcourts.Pages
         {
           LRoles =roleManager.Roles.ToList();
           
+     
           LUsers = userManager.Users.ToList();
+
         }
 
     public async Task<IActionResult> OnPostAsync(string id)
         {
-            IdentityRole role = await roleManager.FindByIdAsync(id);
+            IdentityRole role = await roleManager.FindByIdAsync(id); 
             
             if (role != null)
             {

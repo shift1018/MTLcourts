@@ -1,0 +1,78 @@
+﻿@page
+@model MTLcourts.Pages.NEWModel
+@inject UserManager<IdentityUser> UserManager
+@{
+var currentuser=UserManager.GetUserAsync(User).Result;
+}
+
+
+
+
+
+<h1>Create new Intention</h1>
+
+
+
+<div class="mt-3 col-3">
+        <form method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger "></div>
+
+        <div class="form-group row">
+            <label asp-for="@DateTime.Now" class="col-2 col-form-label">Date: </label>
+            <input class="form-control col-2" type="date" asp-for="@DateTime.Now" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="Time" class="col-2 col-form-label">Time: </label>
+            @* <input class="form-control col-2" type="time" asp-for="@DateTime.Now" asp-format="{0:HH:mm}"/> *@
+            <select name="Time">
+                <option value="2:00pm">2:00 - 4:00 pm</option>
+                <option value="4:00pm">4:00 - 6:00 pm</option>
+                <option value="6:00pm">6:00 - 8:00 pm</option>
+                <option value="8:00pm">8:00 - 10:00 pm</option>
+            </select>
+        </div>
+        <div class="form-group row">
+            <label asp-for="CourtsId" class="col-2 col-form-label">CourtsName: </label>
+            <select name="CourtsId">
+                @foreach (var court in @Model.courtsList)
+                {
+                    <option value="@court.Id">@court.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="NumOfPeople" class="col-2 col-form-label">NumOfPeople: </label>
+            <input class="form-control col-2"  asp-for="NumOfPeople" />
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="@currentuser" class="col-2 col-form-label">User: </label>
+            <input class="form-control col-2"  asp-for="@currentuser" hidden/>
+            <input class="form-control col-2"  asp-for="@currentuser" />
+            <span asp-validation-for="@currentuser" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+        <button type="submit" class="btn btn-primary" >Add Intention</button>
+        </div>
+
+        </form>
+    </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

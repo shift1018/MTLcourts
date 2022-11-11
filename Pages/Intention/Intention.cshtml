@@ -1,0 +1,42 @@
+﻿@page
+@model MTLcourts.Pages.IntentionModel
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@* @using Bootstrap_DatePicker_Razor_Core.Pages; *@
+@{
+}
+<div class="row row-cols-3 g-4">
+<label asp-for="@DateTime.Now" class="col-2 col-form-label">Date: </label>
+<input class="form-control " type="date" asp-for="@DateTime.Now" />
+<a asp-page="NEW"   class="btn btn-sm btn-primary col-4">Add Intention</a>
+</div>
+<br>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var crt in Model.courtsList)
+        {
+  <div class="col">
+    
+    <div class="card h-100">
+         @if (crt.PhotoUrl != null)
+        {
+          <div class="index-court-image-container">
+            <a asp-page="/Intention/NEW" asp-route-id="@crt.Id" >
+              <img class="index-court-image" src="@crt.PhotoUrl"  class="card-img-top" alt="...">
+            </a>            
+          </div>
+        }
+        <div class="card-body">
+        <h5 class="card-title">@crt.Name</h5>
+        </div>
+        @* <div>
+            <a asp-page="/Intention/NEW">2:00 - 4:00 pm</a>
+            <a asp-page="/Intention/NEW">4:00 - 6:00 pm</a>
+            <a asp-page="/Intention/NEW">6:00 - 8:00 pm</a>
+            <a asp-page="/Intention/NEW">8:00 - 10:00 pm</a>
+        </div> *@
+        
+    </div>
+  </div>
+        }
+</div>
+
+
