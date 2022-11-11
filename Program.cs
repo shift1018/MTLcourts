@@ -19,12 +19,12 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>options.SignI
 
 //https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-7.0
 // sign in using google account, follow the link to add google to register, there is next step to talk about deploying to azure
-var configuration = builder.Configuration;
-builder.Services.AddAuthentication().AddGoogle(googleOptions =>
-    {
-        googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-        googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-    });
+// var configuration = builder.Configuration;
+// builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+//     {
+//         googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+//         googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+//     });
 builder.Services.Configure<IdentityOptions>(options =>
 {
 // Password settings. 
