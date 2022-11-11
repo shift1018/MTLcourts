@@ -102,9 +102,10 @@
         </div>
     </div>
     <br>
+     @if (signInManager.IsSignedIn(User)&& User.IsInRole("Admin")) {
     <div class="del-edit-btn-container">
         <a asp-page="/Court/delete" asp-route-id="@Model.court.Id" class="btn btn-info">Delete Court</a>
         <a class="btn btn-info" asp-page="/Court/CourtEdit" asp-route-id="@Model.court.Id">Edit Court</a>
     </div>
- 
+     }
 </div>
