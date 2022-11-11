@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'MTLcourts'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EFFE9BA9A0B34A8C9D9184160F2556A7 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BB2EF23A58014F51882AF8291EE77D75 }}
           package: .
