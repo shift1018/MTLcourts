@@ -88,7 +88,9 @@ namespace MTLcourts.Pages
         {
             if (!ModelState.IsValid)
             {
-                //ModelState.AddModelError(string.Empty, "error");
+                court = await db.Court.Where(court => court.Id == Id).FirstOrDefaultAsync();
+                courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
+                ModelState.AddModelError(string.Empty, "error");
 //                return RedirectToPage("ViewCourt", Id);
                 return Page();
             }

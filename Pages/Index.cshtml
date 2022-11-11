@@ -2,88 +2,104 @@
 @using System.Net
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+  ViewData["Title"] = "Home page";
 }
 
 
 <div class="text-center">
-    <h1 class="display-4"><b>MTL Courts</b></h1><br>
-    <h2 class="display-4">Montreal's premier basketball court finder!</h2><br>
+  <h1 class="display-4 mtl-courts"><b>MTL Courts</b></h1><br>
+  <h3 class="display-6">Montreal's premier basketball court finder!</h2><br>
+</div>
+<div>
+  <label for="zipInput">Find the nearest court</label>
+  <input type="text" id="zipInput" placeholder="Enter postal code">
+  <button type="button" onclick="lonlat()" class="btn btn-primary">Find</button>
 </div>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
-    @foreach (var crt in Model.courtsList)
-        {
-  <div class="col">
-    
-    <div class="card h-100">
-         @if (crt.PhotoUrl != null)
+  @foreach (var crt in Model.courtsList)
+  {
+    <div class="col">
+
+      <div class="card h-100">
+        @if (crt.PhotoUrl != null)
         {
           <div class="index-court-image-container">
-            <a asp-page="/Court/ViewCourt" asp-route-id="@crt.Id" >
-              <img class="index-court-image" src="@crt.PhotoUrl"  class="card-img-top" alt="...">
-            </a>            
+            <a asp-page="/Court/ViewCourt" asp-route-id="@crt.Id">
+              <img class="index-court-image" src="@crt.PhotoUrl" class="card-img-top" alt="...">
+            </a>
           </div>
         }
-      <div class="card-body">
-        <h5 class="card-title">@crt.Name</h5>
-        <p class="card-text">@Html.Raw(WebUtility.HtmlDecode(@crt.Description))</p>
-        <a class="btn btn-light btn-info" asp-page="/Court/ViewCourt" asp-route-id="@crt.Id" >View Court</a>
+        <div class="card-body">
+          <h5 class="card-title">@crt.Name</h5>
+          <p class="card-text">@Html.Raw(WebUtility.HtmlDecode(@crt.Description))</p>
+          <a class="btn btn-light btn-info" asp-page="/Court/ViewCourt" asp-route-id="@crt.Id">View Court</a>
+        </div>
+
       </div>
-    
     </div>
-  </div>
-        }
+  }
 </div>
 
 <div class="container">
-<div id="map"></div>
+  <div id="map"></div>
 </div>
 
- @* <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
- <script>
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
+  function lonlat() {
 
-var map = L.map("map").setView([45.5536, -73.59981], 12);
+    var input = document.getElementById('zipInput');
 
-L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+    var zipCode = input.value;
+    var xhr = $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + zipCode + '&key=AIzaSyAbu_OdJLEzphQg3pIcJ5S7bL8IkWeZt1A');
+
+    xhr.done(function (data) {
+      console.log('Latitude = ' + data.results[0].geometry.location.lat + ' ' + '<br>Longitude = ' + data.results[0].geometry.location.lng);
+    });
+
+  }
+
+</script> 
+}
+
+
+
+@* <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+  integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+  <script src="~/js/site.js" asp-append-version="true"></script>
+  <script>
+
+  var map = L.map("map").setView([45.5536, -73.59981], 12);
+
+  L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
   attribution:
-    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
+  '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
 
-var markerJarry = L.marker([45.5355, -73.6286])
+  var markerJarry = L.marker([45.5355, -73.6286])
   .bindPopup("Jarry Park")
   .addTo(map);
 
-var markerDelorme = L.marker([45.5906, -73.5884])
+  var markerDelorme = L.marker([45.5906, -73.5884])
   .bindPopup("Delorme Park")
   .addTo(map);
 
-var markerSoeurMadeleine = L.marker([45.5316, -73.6107])
+  var markerSoeurMadeleine = L.marker([45.5316, -73.6107])
   .bindPopup("Soeur-Madeleine-Gagnon Park")
   .addTo(map);
 
-var markerSaintRoche = L.marker([45.5324, -73.6308])
+  var markerSaintRoche = L.marker([45.5324, -73.6308])
   .bindPopup("Soeur-Madeleine-Gagnon Park")
   .addTo(map);
 
-var markerBeaubien = L.marker([45.5535, -73.59])
+  var markerBeaubien = L.marker([45.5535, -73.59])
   .bindPopup("Soeur-Madeleine-Gagnon Park")
   .addTo(map);
 
-   var marker = L.marker([45.5536, -73.59981])
- .bindPopup("I am the " )
- .addTo(map);
+  var marker = L.marker([45.5536, -73.59981])
+  .bindPopup("I am the " )
+  .addTo(map);
 
-    </script> *@
-
-
-
-
-
-
-
-
-
-
-
+  </script> *@

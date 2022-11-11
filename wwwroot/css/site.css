@@ -31,8 +31,13 @@ nav{
   font-size: 16px;
 }
 
-.display-4{
+.display-6{
   color: rgb(250, 246, 242);
+}
+
+.mtl-courts{
+  color: rgb(248, 142, 66);
+  font-weight: bold;
 }
 
 html {
@@ -93,7 +98,20 @@ body {
 }
 
 .card{
+  padding-top: 5px;
   border-color: rgb(248, 142, 66);
+  background-color: rgb(250, 246, 242);
+}
+
+.card-body{
+  padding-bottom: 3rem;
+  position: relative;
+}
+
+.card-body a{
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
 }
 
 .img-responsive {
