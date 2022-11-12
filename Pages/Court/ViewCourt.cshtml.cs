@@ -6,6 +6,7 @@ using MTLcourts.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace MTLcourts.Pages
 {
@@ -15,12 +16,16 @@ namespace MTLcourts.Pages
 
         private readonly CourtsDbContext db;
 
+        // private UserManager<IdentityUser> userManager;
 
+
+        // UserManager<IdentityUser> userManager
 
         public ViewCourtModel(ILogger<IndexModel> logger, CourtsDbContext db)
         {
             _logger = logger;
             this.db = db;
+            // this.userManager = userManager;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -32,7 +37,11 @@ namespace MTLcourts.Pages
 
         public Comments comment { get; set; }
 
+        [BindProperty]
         public Checkedin NewCheckIn { get; set; }
+
+        [BindProperty]
+        public IdentityUser currentuser { get; set; }
 
 
         
@@ -53,61 +62,121 @@ namespace MTLcourts.Pages
         [BindProperty]
         public double AvgRating { get; set; }
 
-        // [BindProperty]
-        // public bool IsCheckedIn { get; set; }
+        [BindProperty]
+        public bool IsCheckedIn { get; set; }
 
-        // [BindProperty]
-        //  public int NumCheckedIn { get; set; }
+        [BindProperty]
+         public int NumCheckedIn { get; set; }
 
-        public async Task OnGetAsync()
+        public  void OnGet()
         {
-            court = await db.Court.Include(court => court.User).Where(court => court.Id == Id).FirstOrDefaultAsync();
-            if (court == null) {
-                        // FIXME
-            }
-            courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
+            court =  db.Court.Include(court => court.User).Where(court => court.Id == Id).FirstOrDefault();
+            // if (court == null) {
+            //             // FIXME
+            // }
+            courtComments =  db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToList();
 
-        }
-
-        public async Task<IActionResult> OnPostAsyncCheckin()
-        {
-            // Date = @DateTime.Now;
-            // DateTime dt = Date.Add(Time.TimeOfDay);
-            var userName = User.Identity.Name;
+             var userName = User.Identity.Name;
             var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
-             var courtsId = Id;
+             var courtsId2 = Id;
+           var newcheck =  db.Checkedin.Where(r => r.CourtsId == Id && r.User.UserName == userName).FirstOrDefault();
+            if ( newcheck != null) {
 
-             if (!ModelState.IsValid)
-            {
-                court = await db.Court.Where(court => court.Id == Id).FirstOrDefaultAsync();
-                courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
-                ModelState.AddModelError(string.Empty, "error");
-                return Page();
+                NewCheckIn = newcheck;
             }
-            else
-            {
-               
-                var newCheckin = new MTLcourts.Models.Checkedin {User = user, CourtsId = courtsId, Date = DateTime.Now, IsCheckedIn = NewCheckIn.IsCheckedIn, 
-              NumCheckedIn = NewCheckIn.NumCheckedIn };
+            else{
+            //     var userName2 = User.Identity.Name;
+            // var user2 = db.Users.Where(u => u.UserName == userName2).FirstOrDefault();
+            //  var courtsId2 = Id;
+                NewCheckIn = newcheck;
+                var newCheckin = new MTLcourts.Models.Checkedin {User = user, CourtsId = courtsId2, Date = DateTime.Now, IsCheckedIn = false, 
+              NumCheckedIn = 0 };
               
                db.Checkedin.Add(newCheckin);
 
-              await db.SaveChangesAsync();
+              db.SaveChanges();
+            
+              RedirectToPage("ViewCourt", Id);
+            }
+           
+
+            
+            }
+            // var userName2 = User.Identity.Name;
+            // var user2 = db.Users.Where(u => u.UserName == userName2).FirstOrDefault();
+            //  var courtsId2 = Id;
+
+            //     var newCheckin = new MTLcourts.Models.Checkedin {User = user2, CourtsId = courtsId2, Date = DateTime.Now, IsCheckedIn = false, 
+            //   NumCheckedIn = 0 };
+              
+            //    db.Checkedin.Add(newCheckin);
+
+            //   db.SaveChangesAsync();
+            
+             
+            // }
+
+            //  return RedirectToPage("ViewCourt", Id);
+            
+             
+           
+        
+
+        public IActionResult OnPostCheckin()
+        {
+            // Date = @DateTime.Now;
+            // DateTime dt = Date.Add(Time.TimeOfDay);
+            var userName2 = User.Identity.Name;
+            var user2 = db.Users.Where(u => u.UserName == userName2).FirstOrDefault();
+             var courtsId2 = Id;
+
+                // court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
+                // courtComments = db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToList();
+                // ModelState.AddModelError(string.Empty, "error");
+            
+               
+
+                var newCheckin = new MTLcourts.Models.Checkedin {User = user2, CourtsId = courtsId2, Date = DateTime.Now, IsCheckedIn = IsCheckedIn, 
+              NumCheckedIn = NumCheckedIn };
+              
+               db.Checkedin.Add(newCheckin);
+
+              db.SaveChangesAsync();
+            
+            return RedirectToPage("ViewCourt", Id);
+            //   return RedirectToAction("Get");
+              
+            } 
+
+
+            public IActionResult OnPostCheckout()
+        {
+
+            //    var userName = User.Identity.Name;
+            //     var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
+            //     var courtsId = Id;
+
+            //    var testCheckIn = db.Checkedin.Include(NewCheckIn => NewCheckIn.User).Where(court => court.CourtsId == Id).FirstOrDefault();
+
+            //      testCheckIn.IsCheckedIn = false;
+
+            //       db.SaveChangesAsync();
+
             
             return RedirectToPage("ViewCourt", Id);
             //   return RedirectToAction("Get");
               
             } 
             
-        }
+        
         
 
-        public async Task<IActionResult> OnPostAsyncRating()
+        public IActionResult OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
-                court = await db.Court.Where(court => court.Id == Id).FirstOrDefaultAsync();
-                courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
+                court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
+                courtComments = db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToList();
                 ModelState.AddModelError(string.Empty, "error");
 //                return RedirectToPage("ViewCourt", Id);
                 return Page();
@@ -134,11 +203,11 @@ namespace MTLcourts.Pages
                 };
 
 
-                rating = await db.Ratings.Where(r => r.CourtsId == Id && r.User.UserName == userName).FirstOrDefaultAsync();
-                var ratingsQuery = await db.Ratings.Where(rating => rating.CourtsId == Id).ToListAsync();
+                rating = db.Ratings.Where(r => r.CourtsId == Id && r.User.UserName == userName).FirstOrDefault();
+                var ratingsQuery = db.Ratings.Where(rating => rating.CourtsId == Id).ToList();
                 var count = 0;
                 var sum = 0;
-                court = await db.Court.Where(court => court.Id == Id).FirstOrDefaultAsync();
+                court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
                 if (rating != null)
                 {
                     //ModelState.AddModelError(string.Empty, "You already rated this court. Review only is submitted.");
@@ -152,7 +221,7 @@ namespace MTLcourts.Pages
                     court.AvgRating = AvgRatingNewUpdated;
 
                     db.Comments.Add(newComment);
-                    await db.SaveChangesAsync();
+                    db.SaveChanges();
                     return RedirectToPage("ViewCourt", Id);
                 }
                 else
@@ -167,7 +236,7 @@ namespace MTLcourts.Pages
 
                     db.Comments.Add(newComment);
                     db.Ratings.Add(newRating);
-                    await db.SaveChangesAsync();
+                    db.SaveChanges();
 
                     return RedirectToPage("ViewCourt", Id);
                 }
