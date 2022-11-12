@@ -30,8 +30,10 @@ namespace MTLcourts.Pages
 
     public async Task OnGetAsync()
    {
-    courtsList = await db.Court.ToListAsync();
 
+    courtsList = await db.Court.ToListAsync();
+    intentionsList = await db.Intentions.ToListAsync();
+// court = await db.Court.Include(court => court.User).Where(court => court.Id == Id).FirstOrDefaultAsync();
    }
 
     }

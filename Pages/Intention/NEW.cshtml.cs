@@ -35,8 +35,6 @@ namespace MTLcourts.Pages
 
     [BindProperty]
     public int NumOfPeople  { get; set; }
-// DateTime dt = Date.Add(Time.TimeOfDay);
-    // public Intentions NewIntention { get; set;}
 
     public List<Courts> courtsList { get; set; }
     public async Task OnGetAsync()
@@ -45,15 +43,16 @@ namespace MTLcourts.Pages
 
     }
 
+
     public async Task<IActionResult> OnPostAsync()
             {
-                Date = @DateTime.Now;
+                Date = Date;
                 DateTime dt = Date.Add(Time.TimeOfDay);
                 var courtsId = Request.Form["CourtsId"];
-
+                
                 var intention = new MTLcourts.Models.Intentions {
                     CourtsId = int.Parse(courtsId),
-                    User = currentuser, 
+                    User = await userManager.FindByIdAsync(currentuser.Id),
                     Date = dt, 
                     NumOfPeople = NumOfPeople
                     };

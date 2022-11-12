@@ -80,6 +80,7 @@ namespace MTLcourts.Pages
             var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
              var courtsId2 = Id;
            var newcheck =  db.Checkedin.Where(r => r.CourtsId == Id && r.User.UserName == userName).FirstOrDefault();
+           
             if ( newcheck != null) {
 
                 NewCheckIn = newcheck;
@@ -88,10 +89,10 @@ namespace MTLcourts.Pages
             //     var userName2 = User.Identity.Name;
             // var user2 = db.Users.Where(u => u.UserName == userName2).FirstOrDefault();
             //  var courtsId2 = Id;
-                NewCheckIn = newcheck;
+                
                 var newCheckin = new MTLcourts.Models.Checkedin {User = user, CourtsId = courtsId2, Date = DateTime.Now, IsCheckedIn = false, 
               NumCheckedIn = 0 };
-              
+              NewCheckIn = newCheckin;
                db.Checkedin.Add(newCheckin);
 
               db.SaveChanges();
@@ -126,22 +127,32 @@ namespace MTLcourts.Pages
         {
             // Date = @DateTime.Now;
             // DateTime dt = Date.Add(Time.TimeOfDay);
-            var userName2 = User.Identity.Name;
-            var user2 = db.Users.Where(u => u.UserName == userName2).FirstOrDefault();
+            var userName = User.Identity.Name;
+            var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
              var courtsId2 = Id;
+             var newcheck =  db.Checkedin.Where(r => r.CourtsId == Id && r.User.UserName == userName).FirstOrDefault();
+            //  checkin
+            if(newcheck.IsCheckedIn){
+                
+                newcheck.IsCheckedIn= false;
+              
+            }
+            // check out
+            else {
+                newcheck.NumCheckedIn= NumCheckedIn;
+                newcheck.IsCheckedIn= true;
 
+            }
+            db.SaveChangesAsync();
                 // court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
                 // courtComments = db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToList();
                 // ModelState.AddModelError(string.Empty, "error");
             
                
 
-                var newCheckin = new MTLcourts.Models.Checkedin {User = user2, CourtsId = courtsId2, Date = DateTime.Now, IsCheckedIn = IsCheckedIn, 
-              NumCheckedIn = NumCheckedIn };
-              
-               db.Checkedin.Add(newCheckin);
+                
 
-              db.SaveChangesAsync();
+              
             
             return RedirectToPage("ViewCourt", Id);
             //   return RedirectToAction("Get");
