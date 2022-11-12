@@ -69,40 +69,40 @@ namespace MTLcourts.Pages
 
         }
 
-        public async Task<IActionResult> OnPostAsyncCheckin()
-        {
-            // Date = @DateTime.Now;
-            // DateTime dt = Date.Add(Time.TimeOfDay);
-            var userName = User.Identity.Name;
-            var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
-             var courtsId = Id;
+        // public async Task<IActionResult> OnPostAsyncCheckin()
+        // {
+        //     // Date = @DateTime.Now;
+        //     // DateTime dt = Date.Add(Time.TimeOfDay);
+        //     var userName = User.Identity.Name;
+        //     var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
+        //      var courtsId = Id;
 
-             if (!ModelState.IsValid)
-            {
-                court = await db.Court.Where(court => court.Id == Id).FirstOrDefaultAsync();
-                courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
-                ModelState.AddModelError(string.Empty, "error");
-                return Page();
-            }
-            else
-            {
+        //      if (!ModelState.IsValid)
+        //     {
+        //         court = await db.Court.Where(court => court.Id == Id).FirstOrDefaultAsync();
+        //         courtComments = await db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToListAsync();
+        //         ModelState.AddModelError(string.Empty, "error");
+        //         return Page();
+        //     }
+        //     else
+        //     {
                
-                var newCheckin = new MTLcourts.Models.Checkedin {User = user, CourtsId = courtsId, Date = DateTime.Now, IsCheckedIn = NewCheckIn.IsCheckedIn, 
-              NumCheckedIn = NewCheckIn.NumCheckedIn };
+        //         var newCheckin = new MTLcourts.Models.Checkedin {User = user, CourtsId = courtsId, Date = DateTime.Now, IsCheckedIn = NewCheckIn.IsCheckedIn, 
+        //       NumCheckedIn = NewCheckIn.NumCheckedIn };
               
-               db.Checkedin.Add(newCheckin);
+        //        db.Checkedin.Add(newCheckin);
 
-              await db.SaveChangesAsync();
+        //       await db.SaveChangesAsync();
             
-            return RedirectToPage("ViewCourt", Id);
-            //   return RedirectToAction("Get");
+        //     return RedirectToPage("ViewCourt", Id);
+        //     //   return RedirectToAction("Get");
               
-            } 
+        //     } 
             
-        }
+        // }
         
 
-        public async Task<IActionResult> OnPostAsyncRating()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {

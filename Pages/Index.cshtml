@@ -11,9 +11,12 @@
   <h3 class="display-6">Montreal's premier basketball court finder!</h2><br>
 </div>
 <div>
-  <label for="zipInput">Find the nearest court</label>
-  <input type="text" id="zipInput" placeholder="Enter postal code">
-  <button type="button" onclick="lonlat()" class="btn btn-primary">Find</button>
+  <form action="post">
+    <label for="zipInput">Find the nearest court</label>
+    <input type="text" id="zipInput" placeholder="Enter postal code">
+    <button type="button" onclick="lonlat()" class="btn btn-primary">Find</button>  
+  </form>
+
 </div>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -48,32 +51,23 @@
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script type="text/javascript">
-  @* function lonlat() {
-    var input = document.getElementById('zipInput');
-    var zipCode = input.value;
-    var xhr = $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + zipCode + '&key=AIzaSyAbu_OdJLEzphQg3pIcJ5S7bL8IkWeZt1A');
-
-    xhr.done(function (data) {
-      console.log('Latitude = ' + data.results[0].geometry.location.lat + ' ' + '<br>Longitude = ' + data.results[0].geometry.location.lng);
-    }); *@
     function lonlat() {
       var input = document.getElementById('zipInput');
       var zipCode = input.value;
       var apiResult = $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + zipCode + '&key=AIzaSyAbu_OdJLEzphQg3pIcJ5S7bL8IkWeZt1A');
-      var lat;
-      var lon;
     @* apiResult.done(function (data) {
       console.log('Latitude = ' + data.results[0].geometry.location.lat + ' ' + '<br>Longitude = ' + data.results[0].geometry.location.lng);
     }); *@
         $.ajax({
         type: 'POST',
-        url: "/?handler=GeoData",
-        data: JSON.apiResult,
+        url: "?handler=GeoData",
+        data: apiResult,
+        @* data: JSON.apiResult, *@
         contentType: "application/json",
         dataType: "json",
     }).done(function(data) {
-        lat = data.results[0].geometry.location.lat;
-        lon = data.results[0].geometry.location.lng;
+        var lat = data.results[0].geometry.location.lat;
+        var lon = data.results[0].geometry.location.lng;
         console.log(lat, lon);
     })
 

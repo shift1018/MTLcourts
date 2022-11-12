@@ -21,7 +21,7 @@
     </div>
 
 
-    <div>
+    @* <div>
          <form method="post" asp-page-handler="Checkin" asp-route-id="@Model.court.Id" >
             <div asp-validation-summary="All" class="text-danger"></div>
             @if (signInManager.IsSignedIn(User))
@@ -33,8 +33,8 @@
                 <div class="form-group row">
                     <label asp-for="NewCheckIn.IsCheckedIn">Check In</label>
                     <input type="checkbox" asp-for="NewCheckIn.IsCheckedIn" class="mr-5">
-                    @* <label for="Checkedin" asp-for="IsCheckedIn"> CheckedIn</label><br>
-                    <input type="checkbox" asp-for="IsCheckedIn" id="Checkedin" name="Checkedin" value="true" type="hidden"> *@
+                    <label for="Checkedin" asp-for="IsCheckedIn"> CheckedIn</label><br>
+                    <input type="checkbox" asp-for="IsCheckedIn" id="Checkedin" name="Checkedin" value="true" type="hidden"> 
                  </div>
                   <div class="form-group row">
                 <label asp-for="NewCheckIn.NumCheckedIn" class="col-sm-2 col-form-label">Number if players checking in</label>
@@ -48,11 +48,11 @@
                 </div>
             }
         </form>
-    </div>
+    </div> *@
 
     
     <div class="comments-rating">
-        <form method="post" asp-page-handler="Rating" enctype="multipart/form-data" >
+        <form method="post" enctype="multipart/form-data" >
             <div asp-validation-summary="All" class="text-danger"></div>
             @if (signInManager.IsSignedIn(User))
             {

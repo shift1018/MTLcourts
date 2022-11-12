@@ -39,8 +39,9 @@ public class IndexModel : PageModel
    }
 
 
-    public void OnPostGeoData(){
-        Console.Write("Hello");
+    public IActionResult OnGetGeoData(){
+        return Content("Hello");
+        //Console.Write("Hello");
     }
 
 
