@@ -163,3 +163,23 @@
 - start intentions
 - begin looking at styling
 3. Need assistance / figure things out
+
+2022/11/11 Anton
+1. Done / not done since last scrum:
+- fixed the return page() on the view court page to display errors to user
+- researched on the ajax call to code behind to implement nearest court search option on index page
+2. To do until next Scrum:
+- implement nearest court search option on index page
+- complete css for registration and login pages
+3. Need assistance / figure things out
+  ajax call not reaching the code behind. need assistance
+  
+  2022/11/12 Anton
+1. Done / not done since last scrum:
+- implemented the nearest court search option on index page
+- participated in resolving the checkIn functionality for the user
+2. To do until next Scrum:
+- complete css for registration and login pages
+- complete css for other pages of the web app
+3. Need assistance / figure things out
+  ajax call not reaching the code behind. need assistance
