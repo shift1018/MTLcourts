@@ -1,6 +1,7 @@
 ﻿@page
 @using System.Net
-@model IndexModel
+@* -----------------do we need this line 4 below? ---------------------*@
+@model MTLcourts.Pages.IndexModel
 @{
   ViewData["Title"] = "Home page";
 }
@@ -11,11 +12,21 @@
   <h3 class="display-6">Montreal's premier basketball court finder!</h2><br>
 </div>
 
-<div>
+<div class="zip-search-container">
   <form action="post">
-    <label for="zipInput">Find the nearest court</label>
-    <input type="text" id="zipInput" placeholder="Enter postal code">
-    <button type="button" onclick="lonlat()" class="btn btn-primary">Find</button>  
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="zip-search-inputs">
+      <h4>Find the nearest court</h4>
+      <input type="text" id="zipInput" placeholder="Enter postal code" onchange="lonlat()">
+      <span id="zipError"></span>
+      <input asp-for="CourtLat" type="text" id="latitude" />
+      <input asp-for="CourtLong" type="text" id="longitude" />
+      <button type="submit" class="btn btn-primary btn-find" asp-page-handler="FindCourt">Find</button>
+    </div>
+    <div class="zip-search-btn-container">
+      
+    </div>
+    @* <button type="button" onclick="lonlat()" class="btn btn-primary">Find</button> *@
   </form>
 
 </div>
@@ -52,13 +63,13 @@
 </div>
 
 @* <div class="row">
- <div class="sidebar col-6">
-      <div class="heading">
-        <h1>Our locations</h1>
-      </div>
-      <div id="listings" class="listings"></div>
-    </div>
-    <div id="map" class="map col-6"></div>
+  <div class="sidebar col-6">
+  <div class="heading">
+  <h1>Our locations</h1>
+  </div>
+  <div id="listings" class="listings"></div>
+  </div>
+  <div id="map" class="map col-6"></div>
   </div>
 
   </div> *@
@@ -67,34 +78,46 @@
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script type="text/javascript">
-    function lonlat() {
-      var input = document.getElementById('zipInput');
-      var zipCode = input.value;
+  function lonlat() {
+    var input = document.getElementById('zipInput');
+    var zipCode = input.value;
+    if (zipCode.length != 6) {
+      document.getElementById('zipError').textContent = "Postal code should be 6 chars";
+    } else {
       var apiResult = $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + zipCode + '&key=AIzaSyAbu_OdJLEzphQg3pIcJ5S7bL8IkWeZt1A');
-    @* apiResult.done(function (data) {
-      console.log('Latitude = ' + data.results[0].geometry.location.lat + ' ' + '<br>Longitude = ' + data.results[0].geometry.location.lng);
-    }); *@
+      apiResult.done(function (data) {
+        @* console.log(data); *@
+        var ziplat = data.results[0].geometry.location.lat;
+        var ziplon = data.results[0].geometry.location.lng;
+
+        console.log(ziplat, ziplon, typeof ziplat, typeof ziplon)
+
+        document.getElementById('latitude').value = ziplat;
+        document.getElementById('longitude').value = ziplon;
+      });
+    }
+
+    @* var input = document.getElementById('zipInput');
+        var zipCode = input.value;
+        var apiResult = $.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + zipCode + '&key=AIzaSyAbu_OdJLEzphQg3pIcJ5S7bL8IkWeZt1A');
+        apiResult.done(function (data) {
+        console.log('Latitude = ' + data.results[0].geometry.location.lat + ' ' + '<br>Longitude = ' + data.results[0].geometry.location.lng);
+        });
         $.ajax({
         type: 'POST',
         url: "?handler=GeoData",
         data: apiResult,
-        @* data: JSON.apiResult, *@
+        @* data: JSON.apiResult,
         contentType: "application/json",
         dataType: "json",
-    }).done(function(data) {
+        }).done(function (data) {
         var lat = data.results[0].geometry.location.lat;
         var lon = data.results[0].geometry.location.lng;
         console.log(lat, lon);
-    })
+        }) *@
 
   }
-  }
+
 </script>
 
-
-
 }
-
-
-
-

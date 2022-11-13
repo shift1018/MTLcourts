@@ -35,7 +35,8 @@ nav {
   font-size: 16px;
 }
 
-.display-6 {
+.display-6, 
+.zip-search-inputs h4{
   color: rgb(250, 246, 242);
 }
 
@@ -162,6 +163,28 @@ body {
   border: 1px solid rgb(248, 142, 66);
 }
 
+/* .btn-info:hover {
+  background-color: rgb(213, 227, 231);
+  color: rgb(70, 70, 66);
+  border: 1px solid rgb(248, 142, 66);
+} */
+
+.btn-find {
+  background-color: rgb(248, 142, 66);
+  color: rgb(70, 70, 66);
+  border-color: black;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bolder;
+  width: 70px;
+}
+
+.btn-find:hover {
+  background-color: rgb(70, 70, 66);
+  color: rgb(248, 142, 66);
+  border: 1px solid rgb(248, 142, 66);
+}
+
 .player-reviews {
   max-height: 300px;
   width: auto;
@@ -192,6 +215,11 @@ body {
 /* index page */
 .index-court-image-container {
   text-align: center;
+}
+
+.zip-search-container{
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 /* star-rating css */
