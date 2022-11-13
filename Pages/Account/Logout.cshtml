@@ -3,14 +3,20 @@
 
 
 @{
-    ViewData["Title"] = "User logged out";
+    ViewData["Title"] = "";
 }
 
 <h1>@ViewData["Title"]</h1>
 @{
-    <p>You've been logged out.
-        <a class="" asp-area="" asp-page="/Index">Click to continue.</a>
-    </p>
+    <div class="login-reg-logout">
+        <h1>You've logged out</h1>
+        <br>
+        <a asp-area="" asp-page="/Account/Login"> <button class="btn btn-primary btn-submit button-submit">Login</button> </a>
+    </div>
+    
+
+        
+    
 }
 
 

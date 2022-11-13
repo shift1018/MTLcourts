@@ -80,6 +80,19 @@ body {
   float: right;
 }
 
+.checkin-form{
+  text-align: center;
+}
+
+.numOfPlayers{
+  text-align: center;
+  border:none;
+  border-radius: 5px;
+  width: 60px;
+  height:30px;
+  margin: 10px;
+}
+
 .court-name,
 .court-rating {
   color: rgb(248, 142, 66);
@@ -97,7 +110,8 @@ body {
   margin: 0 2rem 0 2rem;
 }
 
-.form-control:focus {
+.form-control:focus,
+.numOfPlayers:focus {
   border-color: rgb(248, 142, 66);
   box-shadow: 0 0 0 0.2rem rgba(248, 142, 66, 0.4);
 }
@@ -134,9 +148,10 @@ body {
 .button-submit {
   background-color: rgb(248, 142, 66);
   color: rgb(70, 70, 66);
-  height: 80px;
+  height: 90px;
+  width: 90px;
   border-color: black;
-  border-radius: 40px;
+  border-radius: 45px;
   font-size: 18px;
   font-weight: bolder;
 }
@@ -221,6 +236,25 @@ body {
   text-align: center;
   margin-bottom: 2rem;
 }
+
+/* logout */
+.login-reg-logout{
+  text-align: center;
+  margin-top: 10rem;
+}
+
+/* login-register */
+.login-form-container,
+.register-container{
+  margin: 0 auto;
+}
+
+.g-signin2{
+  text-align: center;
+  align-items: center;
+}
+
+
 
 /* star-rating css */
 
