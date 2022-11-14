@@ -37,7 +37,8 @@ namespace MTLcourts.Pages
         public async Task OnGetAsync()
         {
           LRoles =roleManager.Roles.ToList();
-        
+          
+     
           LUsers = userManager.Users.ToList();
 
         }

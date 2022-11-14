@@ -19,7 +19,7 @@ namespace MTLcourts.Data
 
             public DbSet<Checkedin> Checkedin { get; set; }
 
-            public DbSet<Checkedin> Intentions { get; set; }
+            public DbSet<Intentions> Intentions { get; set; }
 
         // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         // {

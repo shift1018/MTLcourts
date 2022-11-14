@@ -33,6 +33,8 @@ namespace MTLcourts.Models
         // [Required]
         public double? AvgRating { get; set; }
 
+        public int? PlayersCheckedIn { get; set; }
+
         public ICollection<Comments>? Comments { get; set; }
          public ICollection<Ratings>? Ratings { get; set; }
          public ICollection<Intentions>? Intentions { get; set; }
