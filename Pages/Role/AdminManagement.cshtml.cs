@@ -34,11 +34,17 @@ namespace MTLcourts.Pages
         
         public List<IdentityRole> LRoles = new List<IdentityRole>();
         public List<IdentityUser> LUsers = new List<IdentityUser>();
+
+        public List<List<IdentityUser>> myList = new List<List<IdentityUser>>();
         public async Task OnGetAsync()
         {
           LRoles =roleManager.Roles.ToList();
           
-     
+            for (int i = 0; i < LUsers.Count; i++)
+            {
+                
+                
+            }
           LUsers = userManager.Users.ToList();
 
         }

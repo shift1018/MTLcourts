@@ -34,7 +34,7 @@ namespace MTLcourts.Pages
     }
     public List<newintention> intList { get; set; }
 
-    public async Task OnGetAsync(int id, DateTime date)
+    public async Task OnGetAsync()
    {
     Date = DateTime.Now.Date;
     courtsList = await db.Court.ToListAsync();
@@ -48,7 +48,7 @@ namespace MTLcourts.Pages
     // public async Task<IActionResult> OnPostAsync()
     //         {
                 
-    //             Date = Date;
+               
 
     //            return Page();
     //         }

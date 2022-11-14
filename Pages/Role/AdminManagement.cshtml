@@ -43,7 +43,7 @@
 
                 
             </tr>
-             @foreach (var user in Model.LUsers @*userManager.Users*@ ) 
+             @* @foreach (var user in Model.LUsers ) 
                 {
                     if(await userManager.IsInRoleAsync(user, role.Name)){
 
@@ -56,7 +56,7 @@
                         
                     </tr>  
                     }   
-                }
+                } *@
                     
         </table>
         @* <th scope="col"><a asp-page="AddUserTORole" asp-route-id="@role.Id"  class="btn btn-sm btn-primary col-2">Add Users</a></th>

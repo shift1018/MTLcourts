@@ -14,7 +14,7 @@ namespace MTLcourts.Pages
 
     private readonly CourtsDbContext db;
     private UserManager<IdentityUser> userManager;
-  
+
     public datetimeIntentionModel(UserManager<IdentityUser> userManager, ILogger<IndexModel> logger, CourtsDbContext db)
     {
         this.userManager = userManager; 
@@ -40,20 +40,21 @@ namespace MTLcourts.Pages
         {
             sum += item.NumOfPeople;
         }
-        
+
     }
 
     public async Task<IActionResult> OnPostAsync(int id, DateTime date)
             {
-            
+
                 DateTime dt = date;
                 var courtsId = id;
                 var username = User.Identity.Name;
                 int np = NumOfPeople;
 
 //if the sign in user is in the list of intention, if yes we modify the numofpeople, or not we will add a new intention with the same courtsid, datetime
-                var intention =  db.Intentions.Where(r =>r.User.UserName == username ).FirstOrDefault();
+                var intention =  db.Intentions.Where(r =>r.User.UserName == username && r.CourtsId == id && r.Date== date ).FirstOrDefault();
                 if(intention!=null ){ //yes
+                
                     intention.NumOfPeople = np;
                 }
                 else {// empty
@@ -67,7 +68,7 @@ namespace MTLcourts.Pages
                  }
 
                 await db.SaveChangesAsync();
-                
+
                 return RedirectToPage("SuccessIntention");
             }
 
