@@ -1,14 +1,15 @@
 ﻿@page
 @model MTLcourts.Pages.RegisterSuccessModel
 @{
-    ViewData["Title"] = "Register confirmation";
+    ViewData["Title"] = "";
 }
 
 <h1>@ViewData["Title"]</h1>
 @{
-    
-    @* <p>Registration succeeded with Username @Model.UserName.
-        <a class="nav-link" asp-area="" asp-page="Account/Login">Click here to log in.</a>
-    </p> *@
-    <p>Registration succeded with username @Model.UserName.<a href="/Account/Login">Click here to login</a></p>
+    <div class="login-reg-logout">
+        <h1>Register confirmation </h1>
+        <h2>Welcome to the team @Model.UserName</h2>
+        <br>
+        <a asp-area="" asp-page="/Account/Login"> <button class="btn btn-primary btn-submit button-submit">Login</button> </a>
+    </div>
 }

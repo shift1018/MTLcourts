@@ -3,62 +3,74 @@
 
 @{
 }
-<div class="row row-cols-3 g-4 col">
-<form method="post" class="col-8">
-<label asp-for="@DateTime.Now.Date" class="col-2 col-form-label ">Date: </label><br>
-<input class="form-control col-3 " type="date" asp-for="Date" ><br>
- <button type="submit" class="btn btn-primary col-3">Submit Date</button><br><br>
+<div>
+  <h1 class="page-title">Let others know when you plan to be on the court and see intentions of others</h1>
+  <div>
+    <br>
 
-<a asp-page="NEW"  asp-route-Date ="Date"  class="btn btn-sm btn-primary col">Add Intention</a>
-</form>
-</div>
-<br>
+    <form method="post">
+      <label asp-for="@DateTime.Now.Date"> Select date to see intentions: </label><br>
+      <input class="form-control date-picker" type="date" asp-for="Date"><br>
+      <button type="submit" class="btn btn-sm btn-primary btn-info">Select</button>
+      <a asp-page="NEW" asp-route-Date="Date" class="btn btn-sm btn-primary btn-info">Add Intention</a>
+    </form>
+  </div>
+  <br>
 
-@* <div class="row row-cols-3 g-4 col-6">
-  <h1>My Intention</h1>
+  @* <div class="row row-cols-3 g-4 col-6">
+    <h1>My Intention</h1>
     @foreach (var i in Model.MyIntention)
-        {
+    {
     <div class="card h-100">
-         
-        <div class="card-body">
-          <h5 class="card-title" >@i.Date</h5>
-          <a asp-page="DeleteIntention" asp-route-id="@i.Id"  class="btn btn-sm btn-danger col-5">Delete</a>
-        </div>
+
+    <div class="card-body">
+    <h5 class="card-title" >@i.Date</h5>
+    <a asp-page="DeleteIntention" asp-route-id="@i.Id" class="btn btn-sm btn-danger col-5">Delete</a>
+    </div>
     </div>
     }
     </div>
-<br> *@
-<div class="row row-cols-1 row-cols-md-3 g-4">
+    <br> *@
+  <div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var crt in Model.courtsList)
-        {
-  <div class="col">
-    
-    <div class="card h-100">
-         @if (crt.PhotoUrl != null)
-        {
-          <div class="index-court-image-container">
-            <a asp-page="/Intention/NEW" asp-route-id="@crt.Id" >
-              <img class="index-court-image" src="@crt.PhotoUrl"  class="card-img-top" alt="...">
-            </a>            
-          </div>
-        }
-        <div class="card-body">
-        <h5 class="card-title">@crt.Name</h5>
-        @* <h5 class="card-title" >@crt.Id</h5> *@
-        </div>
+    {
+      <div class="col">
 
-         @foreach (var intention in Model.intList)
-         {  if (@crt.Id==@intention.CourtsId )
-         {
-          <a asp-page = "/Intention/datetimeIntention" asp-route-id="@crt.Id" asp-route-Date = "@intention.Date">@intention.Date</a>
-          
-
-         }
+        <div class="card h-100">
+          @if (crt.PhotoUrl != null)
+          {
+            <div class="index-court-image-container">
+              <a asp-page="/Intention/NEW" asp-route-id="@crt.Id">
+                <img class="index-court-image" src="@crt.PhotoUrl" class="card-img-top" alt="...">
+              </a>
+            </div>
+          }
+          <div class="card-body-int">
+            <h5 class="card-title">@crt.Name</h5>
+            <br>
+            @* <h5 class="card-title">@crt.Id</h5> *@
             
-         }
-    </div>
+
+            @foreach (var intention in Model.intList)
+            {
+              if (@crt.Id == @intention.CourtsId)
+              {
+                <div class="time-link">
+                  <a asp-page="/Intention/datetimeIntention" asp-route-id="@crt.Id"
+              asp-route-Date="@intention.Date">@intention.Date</a>
+                </div>
+
+
+
+              }
+
+            }
+          </div>
+
+
+        </div>
+      </div>
+    }
   </div>
-        }
+
 </div>
-
-

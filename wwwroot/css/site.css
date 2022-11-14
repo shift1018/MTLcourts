@@ -254,7 +254,57 @@ body {
   align-items: center;
 }
 
+.registration-field{
+  margin-bottom: 10px
+;}
 
+/* admin management */
+.page-title{
+  text-align: center;
+}
+
+.edit-del-admin-btn{
+  background-color: rgb(248, 142, 66);
+  color: rgb(70, 70, 66);
+  border-color: black;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bolder;
+  width: 70px;
+}
+
+.edit-del-admin-btn:hover {
+  background-color: rgb(70, 70, 66);
+  color: rgb(248, 142, 66);
+  border: 1px solid rgb(248, 142, 66);
+}
+
+.create-new-role-btn-cont{
+  text-align: right;
+}
+
+/* intentions */
+.time-link{
+  text-align: center;
+}
+
+.date-picker{
+  width: 150px;
+}
+
+.card-body-int{
+  text-align: center;
+}
+
+.time-link a{
+  color: rgb(70, 70, 66);
+  text-decoration: none;
+}
+
+.time-link a:hover{
+  color: rgb(248, 142, 66);
+  font-weight: bold;
+}
 
 /* star-rating css */
 

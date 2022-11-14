@@ -5,9 +5,12 @@
     ViewData["Title"] = "Create New Role";
 }
 
-<h1>All Roles</h1>
+<h1 class="page-title">All Roles</h1>
 
-<a class="btn btn-sm btn-primary" asp-page="CreateRole">Create New Role</a>
+<div class="create-new-role-btn-cont">
+   <a class="btn btn-sm btn-primary btn-info" asp-page="CreateRole">Create New Role</a> 
+</div>
+
     
     @foreach (var role in Model.LRoles)
     {   <h1>Role Name: @role.Name</h1>
@@ -22,11 +25,11 @@
                 <td class="col-6">@role.Id</td>
                 <td class="col-2">@role.Name</td>
                 
-                <th scope="col"><a asp-page="RoleEdit" asp-route-id="@role.Id"  class="btn btn-sm btn-primary col-5">Edit</a></th>
+                <td scope="col-2"><a asp-page="RoleEdit" asp-route-id="@role.Id"  class="btn btn-sm btn-primary edit-del-admin-btn">Edit</a></td>
 
                 <td class="col-2">
                     <form asp-action="Delete" asp-controller="Administration" asp-route-id="@role.Id"  method="post">
-                        <button type="submit" class="btn btn-sm btn-danger col-5">
+                        <button type="submit" class="btn btn-sm btn-primary edit-del-admin-btn">
                             Delete
                         </button>
                     </form>
@@ -51,8 +54,8 @@
                     <tr>
                         <td class="col-6">@user.Id</td>
                         <td class="col-2">@user.UserName</td>
-                        <th scope="col"><a asp-page="AddUserTo" asp-route-id="@user.Id"  class="btn btn-sm btn-primary col-5">EditUser</a></th>
-                        <th scope="col"><a asp-page="DeleteUserfrom" asp-route-id="@user.Id"  class="btn btn-sm btn-danger col-5">DeleteUser</a></th>
+                        <td scope="col-2"><a asp-page="AddUserTo" asp-route-id="@user.Id"  class="btn btn-sm btn-primary edit-del-admin-btn">Edit</a></td>
+                        <td scope="col-2"><a asp-page="DeleteUserfrom" asp-route-id="@user.Id"  class="btn btn-sm btn-primary edit-del-admin-btn">Delete</a></td>
                         
                     </tr>  
                     }   
