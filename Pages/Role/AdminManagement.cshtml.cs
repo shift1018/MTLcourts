@@ -35,18 +35,20 @@ namespace MTLcourts.Pages
         public List<IdentityRole> LRoles = new List<IdentityRole>();
         public List<IdentityUser> LUsers = new List<IdentityUser>();
 
-        public List<List<IdentityUser>> myList = new List<List<IdentityUser>>();
+        // public List<List<IdentityUser>> myList = new List<List<IdentityUser>>();
         public async Task OnGetAsync()
         {
           LRoles =roleManager.Roles.ToList();
-          
-            for (int i = 0; i < LUsers.Count; i++)
-            {
-                
-                
-            }
+        //   for (int i = 0; i < LRoles.Count; i++)
+        //   {
+        //         var xquery = from user in LUsers
+        //                         where userManager.IsInRoleAsync(user, LRoles[i].Name)
+        //                         select
+                             
+        //         myList[i]= userManager.Users.Where().ToList();
+        //   }
+            
           LUsers = userManager.Users.ToList();
-
         }
 
     public async Task<IActionResult> OnPostAsync(string id)
