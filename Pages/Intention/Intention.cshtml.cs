@@ -19,42 +19,22 @@ namespace MTLcourts.Pages
         this.db = db;
     }
     public List<Courts> courtsList { get; set; }
-    [BindProperty]
+
     public List<Intentions> intentionsList { get; set; }
-    // public List<Intentions> intList { get; set; }
+
     [BindProperty, DataType(DataType.Date)]
     public DateTime Date { get; set; }
     [BindProperty, DataType(DataType.Time)]
     public DateTime Time { get; set; }
-
-   
     
 
     public async Task OnGetAsync()
    {
-    Date = DateTime.Now.Date;
-    // var Datestr = Date.ToString("yyyy-MM-dd");  
-    
+
     courtsList = await db.Court.ToListAsync();
-    // intentionsList = await db.Intentions.Where(i =>i.Date.Date == Date).ToListAsync();
-    // var intList = intentionsList.Distinct( );
-    //  var intList = intentionsList().Select(book => new { book.Author, book.Title })
-    //                                    .Distinct();
-
-    intentionsList = db.Intentions.ToList().Distinct().ToList();
-    
-    // (from intention in db.Intentions
-    //                         where intention.Date.Date == Date
-    //                         select  new { CourtsId= intention.CourtsId && Date = intention.Date}).ToList().Distinct().ToList();
-    // // var intList = Intentionquery.Distinct().ToList();
-
+    intentionsList = await db.Intentions.ToListAsync();
+// court = await db.Court.Include(court => court.User).Where(court => court.Id == Id).FirstOrDefaultAsync();
    }
 
     }
 }
-// var custQuery =
-//     from cust in customers
-//     group cust by cust.City into custGroup
-//     where custGroup.Count() > 2
-//     orderby custGroup.Key
-//     select custGroup;
