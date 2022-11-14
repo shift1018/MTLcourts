@@ -128,14 +128,12 @@ namespace MTLcourts.Pages
              
            
         
-
-        public IActionResult OnPostCheckin()
-        {
             // Date = @DateTime.Now;
             // DateTime dt = Date.Add(Time.TimeOfDay);
             //  court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
+        public IActionResult OnPostCheckin()
+        {
 
-            //-----Comment out-------//
             var userName = User.Identity.Name;
             var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
              var courtsId2 = Id;
@@ -153,6 +151,8 @@ namespace MTLcourts.Pages
 
             }
             db.SaveChangesAsync();
+            return RedirectToPage("ViewCourt", Id);
+                 } 
             //-----Comment out-------//
                 // court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
                 // courtComments = db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToList();
@@ -178,11 +178,11 @@ namespace MTLcourts.Pages
 
             // }
             //-----Comment out-------//
-            return RedirectToPage("ViewCourt", Id);
+          
             //-----Comment out-------//
             //   return RedirectToAction("Get");
               
-            } 
+           
 
 
         //     public IActionResult OnPostCheckout()
