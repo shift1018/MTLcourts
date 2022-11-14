@@ -39,6 +39,7 @@ namespace MTLcourts.Pages
     public List<Courts> courtsList { get; set; }
     public async Task OnGetAsync()
     {
+        Date = DateTime.Now.Date;
         courtsList = await db.Court.ToListAsync();
     }
     public async Task<IActionResult> OnPostAsync()
@@ -62,11 +63,11 @@ namespace MTLcourts.Pages
                     };
 
                 db.Intentions.Add(intention);
-
+}
                 await db.SaveChangesAsync();
 
                 return RedirectToPage("SuccessIntention");
-            }
+            
             }
     }
 }

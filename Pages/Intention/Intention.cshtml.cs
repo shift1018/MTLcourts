@@ -34,9 +34,9 @@ namespace MTLcourts.Pages
     }
     public List<newintention> intList { get; set; }
 
-    public async Task OnGetAsync()
+    public async Task OnGetAsync(int id, DateTime date)
    {
-    // Date = ;
+    Date = DateTime.Now.Date;
     courtsList = await db.Court.ToListAsync();
 
     var Intentionquery = from intention in db.Intentions
@@ -45,13 +45,13 @@ namespace MTLcourts.Pages
      intList = Intentionquery.Distinct().ToList();
    }
 
-    public async Task<IActionResult> OnPostAsync()
-            {
+    // public async Task<IActionResult> OnPostAsync()
+    //         {
                 
-                Date = Date;
+    //             Date = Date;
 
-               return Page();
-            }
+    //            return Page();
+    //         }
 
 }
 }
