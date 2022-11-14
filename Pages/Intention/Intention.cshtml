@@ -3,11 +3,11 @@
 
 @{
 }
-<div class="row row-cols-3 g-4">
+<div class="row row-cols-3 g-4 col-4">
 <label asp-for="Date" class="col-2 col-form-label">Date: </label>
 @* <input class="form-control " type="date" asp-for="Date" value="@DateTime.Now"> *@
-<input class="form-control " type="date" asp-for="Date" SelectedDate= DateTime.Now>
-<a asp-page="NEW"  asp-route-Date ="Date" class="btn btn-sm btn-primary col-4">Add Intention</a>
+<input class="form-control " type="date" asp-for="Date">
+<a asp-page="NEW"  asp-route-Date ="Date"  class="btn btn-sm btn-primary col-4">Add Intention</a>
 </div>
 <br>
 <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -26,7 +26,7 @@
         }
         <div class="card-body">
         <h5 class="card-title">@crt.Name</h5>
-        <h5 class="card-title" >@crt.Id</h5>
+        <h5 class="card-title" hidden>@crt.Id</h5>
         </div>
 
       @* display the Intention list *@
