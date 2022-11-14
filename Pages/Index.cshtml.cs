@@ -41,7 +41,7 @@ public class IndexModel : PageModel
     }
 
 
-    public IActionResult OnPostFindCourt()
+    public IActionResult OnPost()
     {
         
         // if (!ModelState.IsValid)

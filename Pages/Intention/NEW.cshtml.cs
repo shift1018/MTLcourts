@@ -38,12 +38,12 @@ namespace MTLcourts.Pages
 
     public List<Courts> courtsList { get; set; }
     public async Task OnGetAsync()
-    {   Date = DateTime.Now.Date;
+    {
         courtsList = await db.Court.ToListAsync();
     }
     public async Task<IActionResult> OnPostAsync()
             {
-                // Date =Date;
+                Date = Date;
                 DateTime dt = Date.Add(Time.TimeOfDay);
                 var courtsId = int.Parse(Request.Form["CourtsId"]);
                 var userName = User.Identity.Name;
@@ -58,16 +58,15 @@ namespace MTLcourts.Pages
                     CourtsId = courtsId,
                     User = await userManager.FindByIdAsync(currentuser.Id),
                     Date = dt, 
-                    NumOfPeople = np
+                    NumOfPeople = NumOfPeople
                     };
-                    db.Intentions.Add(intention);
-                 }
+
+                db.Intentions.Add(intention);
 
                 await db.SaveChangesAsync();
 
                 return RedirectToPage("SuccessIntention");
             }
+            }
     }
 }
-
-

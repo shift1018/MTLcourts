@@ -62,6 +62,9 @@ namespace MTLcourts.Pages
         [BindProperty]
         public double AvgRating { get; set; }
 
+        // [BindProperty]
+        //  public int PlayersCheckedIn { get; set; }
+
         [BindProperty]
         public bool IsCheckedIn { get; set; }
 
@@ -127,6 +130,7 @@ namespace MTLcourts.Pages
         {
             // Date = @DateTime.Now;
             // DateTime dt = Date.Add(Time.TimeOfDay);
+            //  court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
             var userName = User.Identity.Name;
             var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
              var courtsId2 = Id;
@@ -148,12 +152,25 @@ namespace MTLcourts.Pages
                 // courtComments = db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToList();
                 // ModelState.AddModelError(string.Empty, "error");
             
-               
+            // NewCheckIn = db.Checkedin.Where(r => r.CourtsId == Id).FirstOrDefault();
+            // var checkinQuery = db.Checkedin.Where(NewCheckIn => NewCheckIn.CourtsId == Id).ToList();
+            // var total = 0;
 
-                
+            // court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
+            // foreach (var chek in checkinQuery)
+            // {
+            // if (NewCheckIn.IsCheckedIn= false)
+            // {
+            //     court.PlayersCheckedIn = 0;
+            // }
+            // else
+            // {
+            //     total += chek.NumCheckedIn;
+            // }
 
-              
-            
+            // court.PlayersCheckedIn = total;
+
+            // }
             return RedirectToPage("ViewCourt", Id);
             //   return RedirectToAction("Get");
               

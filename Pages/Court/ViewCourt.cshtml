@@ -17,6 +17,7 @@
             <p class="">@Model.court.Address</p>
             <h4 class="court-rating"><b>Rating:</b> @Model.court.AvgRating</h4>
             <p class="view-court-description">@Html.Raw(WebUtility.HtmlDecode(@Model.court.Description))</p>
+             @* <h4 class="court-rating"><b>Checked In:</b> @Model.court.PlayersCheckedIn</h4> *@
         </div>
     </div>
     <br>
@@ -58,10 +59,11 @@
             @if (signInManager.IsSignedIn(User))
             {
                 //----------CHECKIN--------------//
-                <h4>Let others know you're on the court</h4>
+                @* <h4>Let others know you're on the court</h4> *@
 
                 @if (@Model.NewCheckIn.IsCheckedIn)
                 {
+                     <h4>Don't forget to say Goodbye!</h4>
                     <div class="form-group checkin-form">
                         <button type="submit" class="btn btn-primary btn-submit button-submit" asp-page-handler="Checkin">Check
                             Out</button>
@@ -69,16 +71,17 @@
                 }
                 else
                 {
-                    <div class="checkin-form">
+                    <h4>Let others know you're on the court</h4>
+                    @* <div class="checkin-form"> *@
                         @* <label asp-for="IsCheckedIn">Check In</label>
                             <input type="checkbox" asp-for="IsCheckedIn" class="mr-5"> *@
                         @* <label for="Checkedin" asp-for="IsCheckedIn"> CheckedIn</label><br> *@
                         @* <input type="checkbox" asp-for="IsCheckedIn" id="Checkedin" name="Checkedin" value="true"
                             type="hidden"> *@
-                    </div>
+                    @* </div> *@
                     <div class="checkin-form">
                         <label class=""> Number of players with you</label>
-                        <input asp-for="NumCheckedIn" class="numOfPlayers" min="1" value="1" />
+                        <input asp-for="NumCheckedIn" class="numOfPlayers" min="1" max="20" value="1" />
                         @* <span asp-validation-for="NumCheckedIn" class="text-danger"></span> *@
                         <button type="submit" class="btn btn-primary btn-submit button-submit" asp-page-handler="Checkin">Check
                             In</button>
