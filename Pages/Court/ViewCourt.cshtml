@@ -59,9 +59,7 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             @if (signInManager.IsSignedIn(User))
             {
-                //----------CHECKIN--------------//
                 
-
                  @if (@Model.NewCheckIn.IsCheckedIn)
                 {
                      <h4>Don't forget to say Goodbye!</h4>

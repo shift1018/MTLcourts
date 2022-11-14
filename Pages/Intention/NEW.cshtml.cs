@@ -49,7 +49,8 @@ namespace MTLcourts.Pages
                 var courtsId = int.Parse(Request.Form["CourtsId"]);
                 var userName = User.Identity.Name;
                 int np = NumOfPeople;
-                var newintention =  db.Intentions.Where(r => r.Date == dt  && r.User.UserName == userName ).FirstOrDefault();
+                var newintention =  db.Intentions.Where(r => r.Date == dt  
+                && r.User.UserName == userName ).FirstOrDefault();
                 if(newintention!=null ){
                     newintention.NumOfPeople = np;
                     newintention.CourtsId =courtsId;
