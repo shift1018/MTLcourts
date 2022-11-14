@@ -2,7 +2,15 @@
 @model MTLcourts.Pages.AddCourtSuccessModel
 @{
 
-    ViewData["Title"] = "Add a Court Successfully";
+    ViewData["Title"] = "";
 }
-<h1>Add a Court Successfully</h1>
-<a asp-page="/index">Go back to home page</a>
+
+@{
+    <div class="login-reg-logout">
+        <h1>Court Added</h1>
+        <br>
+        <a asp-area="" asp-page="/Index"> <button class="btn btn-primary btn-submit button-info">Home Page</button> </a>
+    </div>
+            
+    
+}
