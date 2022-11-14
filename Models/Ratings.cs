@@ -15,8 +15,8 @@ namespace MTLcourts.Models
 
         public IdentityUser User { get; set; }
 
-        [Required]
-        [Range (1, 5)]
+        // [Required]
+        // [Range (1, 5)]
         public int Rating { get; set; }
 
          public Courts Courts { get; set; }
