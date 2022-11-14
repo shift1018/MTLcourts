@@ -1,12 +1,15 @@
 ﻿@page
 @model MTLcourts.Pages.NewCourtSuccessModel
 @{
-     ViewData["Title"] = "New court created successfully";
+     ViewData["Title"] = "";
 }
 
 <h1>@ViewData["Title"]</h1>
 @{
-    <p>New court created successfully.
-        <a class="nav-link" asp-area="" asp-page="/Index">Click here to continue.</a>
-    </p>
+
+    <div class="login-reg-logout">
+        <h1>New court created successfully</h1>
+        <br>
+        <a asp-area="" asp-page="/Index"> <button class="btn btn-primary btn-submit button-info">Home Page</button> </a>
+    </div>
 }
