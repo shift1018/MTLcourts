@@ -47,10 +47,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Court/AddCourt">Add Court</a>
                         </li>
+                        }
+                         @if (signInManager.IsSignedIn(User) ){
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Intention/Intention">Intention</a>
-                        </li>}
-                         @if (signInManager.IsSignedIn(User) ){
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Account/Logout">Log out</a>
                         </li>
@@ -79,8 +80,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - MTLcourts - 
-            @* <a asp-area="" asp-page="/Privacy">Privacy</a> *@
+            &copy; 2022 - MTLcourts - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
