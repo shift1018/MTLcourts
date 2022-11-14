@@ -16,6 +16,8 @@ builder.Services.AddDbContextPool<CourtsDbContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>options.SignIn.RequireConfirmedAccount= false)
         .AddEntityFrameworkStores<CourtsDbContext>();
 
+builder.Services.AddControllersWithViews(options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
 
 //https://learn.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-7.0
 // sign in using google account, follow the link to add google to register, there is next step to talk about deploying to azure

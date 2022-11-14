@@ -40,8 +40,8 @@ namespace MTLcourts.Pages
         [BindProperty]
         public Checkedin NewCheckIn { get; set; }
 
-        [BindProperty]
-        public IdentityUser currentuser { get; set; }
+        // [BindProperty]
+        // public IdentityUser currentuser { get; set; }
 
 
         
@@ -78,6 +78,9 @@ namespace MTLcourts.Pages
             //             // FIXME
             // }
             courtComments =  db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToList();
+
+
+
 
              var userName = User.Identity.Name;
             var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
@@ -131,6 +134,8 @@ namespace MTLcourts.Pages
             // Date = @DateTime.Now;
             // DateTime dt = Date.Add(Time.TimeOfDay);
             //  court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
+
+            //-----Comment out-------//
             var userName = User.Identity.Name;
             var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
              var courtsId2 = Id;
@@ -148,6 +153,7 @@ namespace MTLcourts.Pages
 
             }
             db.SaveChangesAsync();
+            //-----Comment out-------//
                 // court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
                 // courtComments = db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToList();
                 // ModelState.AddModelError(string.Empty, "error");
@@ -171,7 +177,9 @@ namespace MTLcourts.Pages
             // court.PlayersCheckedIn = total;
 
             // }
+            //-----Comment out-------//
             return RedirectToPage("ViewCourt", Id);
+            //-----Comment out-------//
             //   return RedirectToAction("Get");
               
             } 
@@ -199,18 +207,18 @@ namespace MTLcourts.Pages
         
         
 
-        public IActionResult OnPostAsync()
+        public IActionResult OnPostRating()
         {
             if (!ModelState.IsValid)
             {
                 court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
                 courtComments = db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToList();
-                ModelState.AddModelError(string.Empty, "error");
+                // ModelState.AddModelError(string.Empty, "error");
 //                return RedirectToPage("ViewCourt", Id);
                 return Page();
             }
-            else
-            {
+            // else
+            // {
                 var userName = User.Identity.Name;
                 var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
                 var courtsId = Id;
@@ -268,7 +276,7 @@ namespace MTLcourts.Pages
 
                     return RedirectToPage("ViewCourt", Id);
                 }
-            }
+            // }
 
             
         }

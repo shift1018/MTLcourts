@@ -5,9 +5,9 @@
 }
 <div class="row row-cols-3 g-4 col">
 <form method="post" class="col-8">
-<label asp-for="Date" class="col-2 col-form-label">Date: </label><br>
-<input class="form-control col-3 " type="date" asp-for="Date"><br>
- <button type="submit" class="btn btn-primary col-3">Submit Date</button><br><br>
+<label asp-for="@DateTime.Now.Date" class="col-2 col-form-label">Date: </label><br>
+<input class="form-control col-3 " type="date" asp-for="Date" ><br>
+ @* <button type="submit" class="btn btn-primary col-3">Submit Date</button><br><br> *@
 
 <a asp-page="NEW"  asp-route-Date ="Date"  class="btn btn-sm btn-primary col">Add Intention</a>
 </form>
