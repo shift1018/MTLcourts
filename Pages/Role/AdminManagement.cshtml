@@ -43,7 +43,7 @@
 
                 
             </tr>
-             @foreach (var user in Model.LUsers @*userManager.Users*@ ) 
+             @foreach (var user in Model.LUsers ) 
                 {
                     if(await userManager.IsInRoleAsync(user, role.Name)){
 
