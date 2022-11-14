@@ -35,6 +35,12 @@ nav {
   font-size: 16px;
 }
 
+.page-title,
+.validation-summary,
+.button-container{
+  text-align: center;
+}
+
 .display-6, 
 .zip-search-inputs h4{
   color: rgb(250, 246, 242);
@@ -146,11 +152,11 @@ body {
 }
 
 .button-submit {
-  background-color: rgb(248, 142, 66, 0.6);
+  background-color: rgb(248, 142, 66);
   color: rgb(70, 70, 66);
   height: 90px;
   width: 90px;
-  border: 1px solid rgb(248, 142, 66);
+  border: 1px solid rgb(70, 70, 66);
   /* border-color: black; */
   border-radius: 45px;
   font-size: 18px;
@@ -240,22 +246,22 @@ body {
 
 /* logout */
 .login-reg-logout{
-  border: 1px solid black;
-  position: relative;
+  /* border: 1px solid black;
+  position: relative; */
   min-height: 15rem;
   text-align: center;
-  /* margin-top: 10rem; */
-  padding: 0px;
+  margin-top: 10rem;
+
 }
 
-.logout-ball{
+/* .logout-ball{
   border: 1px solid black;
   position: absolute;
   margin: 0 auto;
   
-  /* bottom: 150px;
-  left: 400px; */
-}
+  bottom: 150px;
+  left: 400px;
+} */
 
 
 /* login-register */
@@ -270,6 +276,30 @@ body {
 }
 
 
+.admin-buttons{
+  width: 70px;
+  background-color: rgb(248, 142, 66);
+  color: rgb(70, 70, 66);
+  border-color: black;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bolder;
+}
+
+.admin-buttons:hover {
+  background-color: rgb(70, 70, 66);
+  color: rgb(248, 142, 66);
+  border: 1px solid rgb(248, 142, 66);
+}
+
+.edit-user-role-container{
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.create-new-role-container{
+  text-align: right;
+}
 
 /* star-rating css */
 

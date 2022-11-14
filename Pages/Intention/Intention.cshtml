@@ -30,7 +30,7 @@
         </div>
 
       @* display the Intention list *@
-         @foreach (var intention in @Model.intList)
+         @foreach (var intention in @Model.intentionsList)
          {  if (@crt.Id==@intention.CourtsId )
          {
           <a asp-page = " " >@intention.Date</a>

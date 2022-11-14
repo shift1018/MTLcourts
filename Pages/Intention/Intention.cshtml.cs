@@ -19,7 +19,7 @@ namespace MTLcourts.Pages
         this.db = db;
     }
     public List<Courts> courtsList { get; set; }
-
+    [BindProperty]
     public List<Intentions> intentionsList { get; set; }
     // public List<Intentions> intList { get; set; }
     [BindProperty, DataType(DataType.Date)]
@@ -41,10 +41,12 @@ namespace MTLcourts.Pages
     //  var intList = intentionsList().Select(book => new { book.Author, book.Title })
     //                                    .Distinct();
 
-    var Intentionquery = from intention in db.Intentions
-                            where intention.Date.Date == Date
-                            select  new { CourtsId= intention.CourtsId, Date = intention.Date};
-    var intList = Intentionquery.Distinct().ToList();
+    intentionsList = db.Intentions.ToList().Distinct().ToList();
+    
+    // (from intention in db.Intentions
+    //                         where intention.Date.Date == Date
+    //                         select  new { CourtsId= intention.CourtsId && Date = intention.Date}).ToList().Distinct().ToList();
+    // // var intList = Intentionquery.Distinct().ToList();
 
    }
 

@@ -12,27 +12,6 @@
   <h3 class="display-6">Montreal's premier basketball court finder!</h2><br>
 </div>
 
-<div class="zip-search-container">
-  <form action="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="zip-search-inputs">
-      <h4>Find the nearest court</h4>
-      <input type="text" id="zipInput" placeholder="Enter postal code" onchange="lonlat()">
-      <span id="zipError"></span>
-      <input asp-for="CourtLat" type="text" id="latitude" />
-      <input asp-for="CourtLong" type="text" id="longitude" />
-      <button type="submit" class="btn btn-primary btn-find" asp-page-handler="FindCourt">Find</button>
-    </div>
-    <div class="zip-search-btn-container">
-      
-    </div>
-    @* <button type="button" onclick="lonlat()" class="btn btn-primary">Find</button> *@
-  </form>
-
-</div>
-
-
-
 <div class="row row-cols-1 row-cols-md-3 g-4">
   @foreach (var crt in Model.courtsList)
   {
@@ -56,6 +35,25 @@
       </div>
     </div>
   }
+</div>
+<br>
+
+<div class="zip-search-container">
+  <form action="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="zip-search-inputs">
+      <h4>Find the nearest court</h4>
+      <input type="text" id="zipInput" placeholder="Enter postal code" onchange="lonlat()">
+      <span id="zipError"></span>
+      <input asp-for="CourtLat" type="text" id="latitude" />
+      <input asp-for="CourtLong" type="text" id="longitude" />
+      <button type="submit" class="btn btn-primary btn-find" asp-page-handler="FindCourt">Find</button>
+    </div>
+    <div class="zip-search-btn-container">
+
+    </div>
+    @* <button type="button" onclick="lonlat()" class="btn btn-primary">Find</button> *@
+  </form>
 </div>
 
 <div class="container">
