@@ -306,6 +306,21 @@ body {
   font-weight: bold;
 }
 
+.player-list-table{
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.numOfPlayersInt{
+  text-align: center;
+  margin: 0 auto;
+  border:none;
+  border-radius: 5px;
+  width: 60px;
+  height: 30px;
+}
+
+
 /* star-rating css */
 
 .rating-container {
