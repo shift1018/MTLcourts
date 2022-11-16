@@ -71,6 +71,11 @@ namespace MTLcourts.Pages
         [BindProperty]
          public int NumCheckedIn { get; set; }
 
+        public int sum { get; set; }  =0 ;
+
+        
+    public List<Checkedin> checkinList { get; set; }
+
         public  void OnGet()
         {
             court =  db.Court.Include(court => court.User).Where(court => court.Id == Id).FirstOrDefault();
@@ -79,7 +84,11 @@ namespace MTLcourts.Pages
             // }
             courtComments =  db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToList();
 
-
+            checkinList = db.Checkedin.Where(i=>i.CourtsId==Id && i.IsCheckedIn==true).ToList();             
+        foreach (var item in checkinList)
+        {
+            sum += item.NumCheckedIn;
+        }
 
 
              var userName = User.Identity.Name;
@@ -106,31 +115,8 @@ namespace MTLcourts.Pages
               RedirectToPage("ViewCourt", Id);
             }
            
-
-            
             }
-            // var userName2 = User.Identity.Name;
-            // var user2 = db.Users.Where(u => u.UserName == userName2).FirstOrDefault();
-            //  var courtsId2 = Id;
 
-            //     var newCheckin = new MTLcourts.Models.Checkedin {User = user2, CourtsId = courtsId2, Date = DateTime.Now, IsCheckedIn = false, 
-            //   NumCheckedIn = 0 };
-              
-            //    db.Checkedin.Add(newCheckin);
-
-            //   db.SaveChangesAsync();
-            
-             
-            // }
-
-            //  return RedirectToPage("ViewCourt", Id);
-            
-             
-           
-        
-            // Date = @DateTime.Now;
-            // DateTime dt = Date.Add(Time.TimeOfDay);
-            //  court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
         public IActionResult OnPostCheckin()
         {
 
@@ -148,63 +134,13 @@ namespace MTLcourts.Pages
             else {
                 newcheck.NumCheckedIn= NumCheckedIn;
                 newcheck.IsCheckedIn= true;
+                newcheck.Date = DateTime.Now;
 
             }
             db.SaveChangesAsync();
             return RedirectToPage("ViewCourt", Id);
                  } 
-            //-----Comment out-------//
-                // court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
-                // courtComments = db.Comments.Include(comment => comment.User).Where(comment => comment.CourtsId == Id).ToList();
-                // ModelState.AddModelError(string.Empty, "error");
-            
-            // NewCheckIn = db.Checkedin.Where(r => r.CourtsId == Id).FirstOrDefault();
-            // var checkinQuery = db.Checkedin.Where(NewCheckIn => NewCheckIn.CourtsId == Id).ToList();
-            // var total = 0;
-
-            // court = db.Court.Where(court => court.Id == Id).FirstOrDefault();
-            // foreach (var chek in checkinQuery)
-            // {
-            // if (NewCheckIn.IsCheckedIn= false)
-            // {
-            //     court.PlayersCheckedIn = 0;
-            // }
-            // else
-            // {
-            //     total += chek.NumCheckedIn;
-            // }
-
-            // court.PlayersCheckedIn = total;
-
-            // }
-            //-----Comment out-------//
-          
-            //-----Comment out-------//
-            //   return RedirectToAction("Get");
-              
            
-
-
-        //     public IActionResult OnPostCheckout()
-        // {
-
-            //    var userName = User.Identity.Name;
-            //     var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
-            //     var courtsId = Id;
-
-            //    var testCheckIn = db.Checkedin.Include(NewCheckIn => NewCheckIn.User).Where(court => court.CourtsId == Id).FirstOrDefault();
-
-            //      testCheckIn.IsCheckedIn = false;
-
-            //       db.SaveChangesAsync();
-
-            
-        //     return RedirectToPage("ViewCourt", Id);
-        //     //   return RedirectToAction("Get");
-              
-        //     } 
-            
-        
         
 
         public IActionResult OnPostRating()
